@@ -30,7 +30,10 @@
 % authoryear    To obtain author/year citation style instead of numeric.
 
 \usepackage{amsmath}
-
+\usepackage{longtable}
+\usepackage{stmaryrd}
+\usepackage[mathletters]{ucs}
+\usepackage[utf8x]{inputenc}
 
 \begin{document}
 
@@ -86,9 +89,111 @@ keyword1, keyword2
 
 \section{Overview of MoA}
 
-\section{Overview of Delayed arrays}
+\section{Overview of Pull arrays}
+
+The functional programming community has recently gained an increased
+interest in high performance parallel array programming
+\cite{keller2010regular,Axelsson:2010:Feldspar,Mainland:2010:Nikola,Svensson:2011:Obsidian,Claessen:2012:Expressive,Ankner:2013:AnEDSL,lippmeier2011efficient}. One
+of the central abstractions in this line of work is the \emph{pull
+  array}, also know as delayed array. The can be defined as follows
+(we use Haskell \cite{marlow2010haskell} to demonstrate functions
+programs).
+
+\begin{verbatim}
+data Pull a = Pull { ixf    :: (Int -> a)
+                   , length :: Int
+                   }
+\end{verbatim}
+
+Arrays are represented as functions from index to element. We refer to
+this function as an \emph{index function}. Additionally arrays also
+has a length.
+
+This representation has several advantages:
+\begin{itemize}
+\item \emph{Parallelism}. Since each element is computed
+  independently, they can easily be computed in parallel.
+\item \emph{Fusion}. When functions on pull arrays are composed, the intermediate
+  arrays can be automatically removed. 
+\item \emph{Compositionality}. Pull arrays provide a wealth of
+  compositional and highly reusable combinators. These can be composed
+  together to write high-level programs which typically are easier to
+  understand than monolithic array processing code.
+\end{itemize}
+
+\begin{figure}
+\begin{verbatim}
+map :: (a -> b) -> Pull a -> Pull b
+map f (Pull ixf l) = Pull (f . ixf) l
+\end{verbatim}
+\caption{Example functions on pull arrays}
+\end{figure}
+
+\subsection{Fusion}
+
+\subsection{Higher dimensions}
 
 \section{Comparison}
+
+\subsection{Types}
+
+\subsection{\(\psi\) reductions and fusion}
+
+\subsection{Higher dimensions}
+
+\subsection{Functions}
+
+\begin{tabular}{|@{}l|l@{}|}
+\hline
+MoA & Feldspar
+\\
+\hline
+δ & dim . extent
+\\
+ρ & extent
+\\
+ιξⁿ & -- generalized enumFromTo
+\\
+ψ & index
+\\
+rav & -- flattens to a one-dimensional array
+\\
+γ & toIndex
+\\
+γ' & fromIndex
+\\
+$s \: \hat{ρ} \: ξ$ & reshape
+\\
+π x & product
+\\
+τ & size
+\\
+++ & ++
+\\
+ξ₁ f ξ₂ & zipWith f ξ₁ ξ₁
+\\
+σ f ξ & map f ξ
+\\
+ξ f σ & map f ξ
+\\
+$\bigtriangleup$ & take
+\\
+$\bigtriangledown$ & drop
+\\
+$op^{red}$ & fold
+\\
+Φ & reverse
+\\
+Θ & rotate
+\\
+$\varobslash$ & -- generalized transpose
+\\
+$f Ω_d ξ$ & -- Apply $f$ along the dimension $d$ of $ξ$
+\\
+\hline
+\end{tabular}
+
+\subsection{Example programs}
 
 \section{Related work}
 
@@ -103,6 +208,7 @@ Acknowledgments.
 % We recommend abbrvnat bibliography style.
 
 \bibliographystyle{abbrvnat}
+\bibliography{bibliography}
 
 % The bibliography should be embedded for final submission.
 
