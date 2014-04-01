@@ -133,6 +133,54 @@ map f (Pull ixf l) = Pull (f . ixf) l
 
 \subsection{Fusion}
 
+As mentioned, one of the most important advantages of Pull arrays is
+that they support
+fusion\cite{gill1993short,axelsson2010feldspar,keller2010regular}. Fusion
+is a program transformation which removes intermediate data structures
+and is a decendant of deforestation
+\cite{wadler1990deforestation}. Fusion supercedes transformations such
+as loop fusion in optimizing compilers for imperative languages.  Pull
+arrays make it particularly simple to achieve fusion. It simply
+amounts to inlining the definitions of functions.
+
+As an example of fusion consider the example
+\verb!map (*2) (map (*5) arr)!, where each element of the array
+\verb!arr! is first multiplied by five and then again by
+two. Conceptually, there is an intermediate array created after the
+first \verb!map! but thanks to fusion it will be removed. Fusion will proceed
+as follows:
+
+\begin{verbatim}
+map (*2) (map (*5) arr)
+=> { arr }
+map (*2) (map (*5) (Pull ixf l)
+=> { map }
+map (*2) (Pull ((*5) . ixf) l)
+=> { map }
+Pull ((*2) . (*5) . ixf) l)
+\end{verbatim}
+
+The result is a single Pull array, the intermediate array has been removed.
+
+The correctness of fusion relies crucially on the language being
+\emph{pure}. If side effects where allowed in the indexing function
+fusion would not be correct.
+
+There are two different ways of implementing Pull arrays in the
+literature. The simplest one comes from using Pull arrays in an
+embedded langauge, i.e. when the array language is implemented as a
+library in another host language. Examples of such languages are
+Pan\cite{elliott2003compiling}, Feldspar\cite{Axelsson:2010:Feldspar},
+Obsidian\cite{Svensson:2011:Obsidian} and
+Nikola\cite{Mainland:2010:Nikola}. By using the technique of
+implementing Pull arrays as \emph{shallow embeddings} on top of a
+\emph{deeply embedded} code language, fusion comes completely for free
+\cite{svenningsson2013combining}.
+
+In the array library Repa\cite{keller2010regular}, compiler supported
+rewrite rules are used to implement fusion \cite{jones2001playing}.
+
+
 \subsection{Higher dimensions}
 
 \section{Comparison}
