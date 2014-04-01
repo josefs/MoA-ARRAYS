@@ -62,9 +62,9 @@
 \title{Title Text}
 \subtitle{Subtitle Text, if any}
 
-\authorinfo{Name1}
-           {Affiliation1}
-           {Email1}
+\authorinfo{Josef Svenningsson}
+           {Department of Computer Science of Engineering\\Chalmers University of Technology}
+           {josef.svenningsson@chalmers.se}
 \authorinfo{Lenore M. Mullin}
            {Emeritus Professor\\Department of Computer Science \\
 University at Albany, SUNY}
@@ -125,8 +125,29 @@ This representation has several advantages:
 
 \begin{figure}
 \begin{verbatim}
+-- Mapping a function over an array
 map :: (a -> b) -> Pull a -> Pull b
 map f (Pull ixf l) = Pull (f . ixf) l
+
+-- Apply a binary operation itemwise on two arrays
+zipWith :: (a -> b -> c)
+        -> Pull a -> Pull b -> Pull c
+zipWith f (Pull ixf1 l1) (Pull ixf2 l2)
+  = Pull (\i -> f (ixf1 i) (ixf2 i)) (min l1 l2)
+
+-- Takes the n first elements of an array
+take :: Int -> Pull a -> Pull a
+take n (Pull ixf l) = Pull ixf (min n l)
+
+-- Drops the n first elements of an array
+drop :: Int -> Pull a -> Pull a
+drop n (Pull ixf l)
+  = Pull (\i -> ixf (i + n)) (max (l - n) 0)
+
+-- Rotate an array k steps to the left
+rotate :: Int -> Pull a -> Pull a
+rotate k (Pull ixf l)
+  = Pull (\i -> ixf ((i + k) `mod` l)) l
 \end{verbatim}
 \caption{Example functions on pull arrays}
 \end{figure}
@@ -180,8 +201,50 @@ implementing Pull arrays as \emph{shallow embeddings} on top of a
 In the array library Repa\cite{keller2010regular}, compiler supported
 rewrite rules are used to implement fusion \cite{jones2001playing}.
 
-
 \subsection{Higher dimensions}
+
+The first uses of Pull arrays used a fixed number of dimensions,
+typically either one or two. However, the Repa library introduced a
+new expressive notion of higher dimensionality for Push arrays
+\cite{keller2010regular}. The number dimensions of an array, referred
+to as the \emph{shape}, are determined statically in the type
+system. While this might seem very constraining, a key innovation in
+Repa is the notion on \emph{shape polymorphism} which makes it
+possible to write functions which accepts arrays of any shape. Below
+shows the definition of the type of shapes. It is a variation on how
+it is represented in Feldspar.
+
+\begin{verbatim}
+data Z
+data i :. sh
+
+data Shape sh where
+  Z :: Shape Z
+  (:.) :: Shape tail -> Int -> Shape (tail :. Int)
+\end{verbatim}
+
+The first two data declarations introduces new types, \verb!Z! and
+\verb!:.!, without any constructors. They are used to create
+snoc-lists on the type level, the definition of \verb!Shape!.  The
+type \verb!Shape! is a recursive data type with two constructors. The
+first constructor \verb!Z! indicates that the shape has zero
+dimensions.  The second constructor \verb!:.! adds one dimension to
+another shape, and stores how many elements there are in that
+dimension. The type \verb!Shape! has a type parameter which is a snoc
+list with one element for each dimension.
+
+\begin{verbatim}
+data Pull sh a = Pull (Shape sh -> a) (Shape sh)
+
+map :: (a -> b) -> Pull sh a -> Pull sh a
+map f (Pull ixf sh) = Pull (f . ixf) sh
+
+zipWith :: (a -> b -> b) -> 
+           Pull sh a -> Pull sh b -> Pull sh c
+zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
+  = Pull (\sh -> f (ixf1 sh) (ixf2 sh2))
+\end{verbatim}
+
 
 \section{Comparison}
 
