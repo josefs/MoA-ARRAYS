@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  31 MAR 2014 15:59
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009) (format=pdflatex 2009.11.7)  31 MAR 2014 20:11
 entering extended mode
  %&-line parsing enabled.
 **paper.tex
@@ -197,9 +197,9 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
 \c@definition=\count110
 \c@corollary=\count111
 \c@theorem=\count112
-LaTeX Font Info:    Try loading font information for U+stmry on input line 58.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 56.
 (/usr/local/texlive/2009/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-Overfull \hbox (31.08234pt too wide) detected at line 106
+Overfull \hbox (31.08234pt too wide) detected at line 105
 [] [] []
  []
 
@@ -208,21 +208,21 @@ Overfull \hbox (31.08234pt too wide) detected at line 106
 
 Non-PDF special ignored!
 
-]
-Underfull \vbox (badness 2035) has occurred while \output is active []
-
- [2]
+] [2]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 327.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 326.
 
-Overfull \hbox (55.13293pt too wide) in paragraph at lines 325--369
+Overfull \hbox (55.13293pt too wide) in paragraph at lines 324--368
 [][] 
  []
 
-) [3]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+)
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 115.
- (/usr/local/texlive/2009/texmf-dist/tex/latex/ucs/data/uni-3.def
+ [3] (/usr/local/texlive/2009/texmf-dist/tex/latex/ucs/data/uni-3.def
 File: uni-3.def 2004/10/17 UCS: Unicode data U+0300..U+03FF
 )
 (/usr/local/texlive/2009/texmf-dist/tex/latex/ucs/data/uni-32.def
@@ -233,7 +233,7 @@ File: uni-32.def 2004/10/17 UCS: Unicode data U+2000..U+20FF
 Here is how much of TeX's memory you used:
  2844 strings out of 493848
  35271 string characters out of 3149207
- 108759 words of memory out of 3000000
+ 107864 words of memory out of 3000000
  6094 multiletter control sequences out of 15000+200000
  33881 words of font info for 66 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -266,7 +266,7 @@ dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2009/texmf-dist/fonts
 w/times/utmr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/ut
 mr8a.pfb></usr/local/texlive/2009/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on paper.pdf (5 pages, 289179 bytes).
+Output written on paper.pdf (5 pages, 289156 bytes).
 PDF statistics:
  127 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

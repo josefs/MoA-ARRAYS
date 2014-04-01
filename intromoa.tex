@@ -29,45 +29,44 @@ was inspired by Dirac's {\em Psi Vectors} and his communications with Einstein t
 about them. These results began with the awareness that Iverson's APL\cite{iverson62}
 was inspired by Sylvester's Universal Algebra\cite{sylvester} and the fact that he and Cayley invented matrices.
 The programming language, APL, embodied Ken's notation into an interpretive computing environment. It was at this point
-that theoretical anamolies were introduced. More on this later.
+that theoretical anamolies were introduced. 
 
 Not only did  Ken believe that APL's array algebra was the ideal basis for a programming language, he (and others) believed that
 an ideal machine language supported array operations. This led to HP building an 
 APL machine based on Phil Abram's dissertation\cite{abrams70}. Abrams was the first to identify ways 
-to define an algebra of arrays based on shapes; others followed\cite{lyon,guibas}. He believed that if array operations were based on 
+to define an algebra of arrays based on shapes; others attempted to
+put closure on his work\cite{lyon,guibas}. Abrams believed that if array operations were based on 
 indexing with  shapes, all  indexing in the array expression could be  composed
 and  thus could minimize the creation (and deletion) of temporary arrays,
 a huge overhead. One of the reasons HP's APL Machine did not succeed was that this analysis was done at run time.
-It was  Alan Perlis  who realized that these optimizations should be done at compile time\cite{perlis}, others
-followed\cite{miller,budd84}. Perlis was also the first to recognize that there were too many anamolies in both APL's
-algebra and environment; he recommended a functional array calculator based on the lambda 
+It was  Alan Perlis, and later others\cite{miller,budd84},  who realized that these optimizations should be done at compile time. Attempts at compilation led Perlis to realize that  anomalies in the language~\cite{gerhart} 
+made it difficult to optimize and impossible to verify correctness of 
+programs leading him to recommend a functional array calculator based on the lambda 
 calculus\cite{tu2,tu3}. This awareness led to Mullin's collaborations with Klaus Berkling to combine MoA, Psi Calculus, and
 the Lambda Lalculus, theoretically an ideal enviornment\cite{berkling} and basis for a 
 functional programming language with 
 arrays\cite{mul91,budd91,hm92,mul93,mul94,mul96}. 
 
-When compiler support was implemented in APL,
-the main limitation was that the anomalies in the language~\cite{gerhart} 
-made it difficult to optimize and impossible to verify correctness of 
-programs.   
 
-MoA and the Psi Calculus, as a theory  has  also been used to describe and verify 
+
+MoA and the Psi Calculus, as a theory,  have  also been used to describe and verify 
 hardware\cite{hardy1,hardy2,fftharry}, describe the partitioning and
 scheduling of array operations (and their costs)\cite{mdst93,lee95,aachen96,coffin94,ll2,mcmahon95,haleh98}, 
 and the formulation of parallel and distributed processing\cite{Mul03}. 
 MoA and $\psi$-Calculus, can be used to abstract complex processor memory layouts 
 for tensor/array expressions, reduce these expressions first to a semantic 
-normal form (Denotational Normal Form-DNF) then to an operational normal form 
+normal form (Denotational Normal Form-DNF) then to an Operational Normal Form 
 (ONF). The ONF describes how to {\em build} the code using 
 {\em start, stop, stride}, and {\em count}: a universal machine abstraction.
 This is possible by {\em abstractly} lifting the dimension of an expression to include all aspects
-of a processor, memory, communication topology. . 
+of a processor, memory, communication topology. For example, to map a 2-d array expression to
+n  processors we would lift the dimenion to 3-d. 
 %
 %
 %
 %\bibliographystyle{plain}
 %\bibliography{paper1,hpf,workshop}
-\section*{Elements of the theory}
+\subsection*{Elements of the theory}
 \subsection*{\label{indshp} Indexing and Shapes}
 
 The central operation of MoA is the indexing function
@@ -192,7 +191,7 @@ Before presenting the formal definition of the $\psi$ indexing function we
 define a few functions on vectors:
 \begin{tabbing}
 
-\hspace{2cm}\= $u \;\cat\; v$ \hspace{1cm} \=		\=catentation of vectors $u$ and $v$ \\
+\hspace{.25cm}\= $u \;\cat\; v$ \hspace{1cm} \=		\=catentation of vectors $u$ and $v$ \\
 \>$u$ + $v$\>		\>itemwise vector addition assuming $t_u = t_v$ \\
 \>$u \times v$ \>	\>	itemwise vector multiplication \\
 \>$n$ + $u$, $u$ + $n$ \>	addition of a scalar to each item of a vector \\
@@ -369,7 +368,7 @@ $\Omega$& Omega& Applies a unary or binary function to array argument(s) \\
 \caption{\label{moa}Summary of MoA Operations}
 \end{figure}
 
-\section*{Higher Order Operations}
+\subsection*{Higher Order Operations}
 
 Thus far operation on arrays, such as concatenation, rotation, etc., have been 
 performed over their 0th dimensions.  We introduce the higher order binary 
