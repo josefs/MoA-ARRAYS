@@ -62,11 +62,11 @@
 \title{Title Text}
 \subtitle{Subtitle Text, if any}
 
-\authorinfo{Name1}
-           {Affiliation1}
-           {Email1}
+\authorinfo{Josef Svenningsson}
+           {Department of Computer Science of Engineering\\Chalmers University of Technology}
+           {josef.svenningsson@chalmers.se}
 \authorinfo{Lenore M. Mullin}
-           {Emeritus Professor\\Department of Computer Science \\
+           {Emeritus Professor\\Department of Computer Science\\
 University at Albany, SUNY}
            {lenore@cs.albany.edu}
 
@@ -88,10 +88,42 @@ keyword1, keyword2
 
 \section{Introduction}
 
+Computing with arrays has been a constantly important paradigm in the
+history of computing. For this reason we have seen a plethora of
+formalisms and languages being developed to aid theoriticians and
+developers to produce more suitable abstractions and faster programs.
+Examples include Fortran, APL and Matlab but the list goes on and on.
+Having many different options to choose from can be a good thing but
+it can also lead to a balkanization of the community. When researcher
+dedicated to different formalisms can no longer talk to each other it
+inhibits collaborations and limits the impact of innovatation.
+
+In this paper we aim to rectify some of the fragmentation of the
+high-performance array programming community by relating two
+particular formalisms: Mathematics of Arrays and Pull arrays. On the
+surface they appear rather different but at their core they share many
+principles and properties which we will examine in this paper. In
+particular we will highlight the following points:
+\begin{itemize}
+\item We give an introduction to both MoA (section \ref{sec:moa}) and Pull
+  arrays (section \ref{sec:pull}).
+\item The two formalisms are compared with respect to types (section
+  \ref{sec:types}), fusion/\(\psi\)-reduction (section
+  \ref{sec:normalization}), how they deal with higher dimensions
+  (section \ref{sec:highdim}) and notation (section \ref{sec:notation}).
+\end{itemize}
+
+We would like to stress that we are not looking to declare a
+winner. Instead our intention is that this paper can serve as a help
+for the two communities to be able to learn about each others work.
+
 \section{Overview of MoA}
+\label{sec:moa}
+
 \input{intromoa}
 
 \section{Overview of Pull arrays}
+\label{sec:pull}
 
 The functional programming community has recently gained an increased
 interest in high performance parallel array programming
@@ -125,25 +157,143 @@ This representation has several advantages:
 
 \begin{figure}
 \begin{verbatim}
+-- Mapping a function over an array
 map :: (a -> b) -> Pull a -> Pull b
 map f (Pull ixf l) = Pull (f . ixf) l
+
+-- Apply a binary operation itemwise on two arrays
+zipWith :: (a -> b -> c)
+        -> Pull a -> Pull b -> Pull c
+zipWith f (Pull ixf1 l1) (Pull ixf2 l2)
+  = Pull (\i -> f (ixf1 i) (ixf2 i)) (min l1 l2)
+
+-- Takes the n first elements of an array
+take :: Int -> Pull a -> Pull a
+take n (Pull ixf l) = Pull ixf (min n l)
+
+-- Drops the n first elements of an array
+drop :: Int -> Pull a -> Pull a
+drop n (Pull ixf l)
+  = Pull (\i -> ixf (i + n)) (max (l - n) 0)
+
+-- Rotate an array k steps to the left
+rotate :: Int -> Pull a -> Pull a
+rotate k (Pull ixf l)
+  = Pull (\i -> ixf ((i + k) `mod` l)) l
 \end{verbatim}
 \caption{Example functions on pull arrays}
 \end{figure}
 
 \subsection{Fusion}
 
+As mentioned, one of the most important advantages of Pull arrays is
+that they support
+fusion\cite{gill1993short,axelsson2010feldspar,keller2010regular}. Fusion
+is a program transformation which removes intermediate data structures
+and is a decendant of deforestation
+\cite{wadler1990deforestation}. Fusion supercedes transformations such
+as loop fusion in optimizing compilers for imperative languages.  Pull
+arrays make it particularly simple to achieve fusion. It simply
+amounts to inlining the definitions of functions.
+
+As an example of fusion consider the example
+\verb!map (*2) (map (*5) arr)!, where each element of the array
+\verb!arr! is first multiplied by five and then again by
+two. Conceptually, there is an intermediate array created after the
+first \verb!map! but thanks to fusion it will be removed. Fusion will proceed
+as follows:
+
+\begin{verbatim}
+map (*2) (map (*5) arr)
+=> { arr }
+map (*2) (map (*5) (Pull ixf l)
+=> { map }
+map (*2) (Pull ((*5) . ixf) l)
+=> { map }
+Pull ((*2) . (*5) . ixf) l)
+\end{verbatim}
+
+The result is a single Pull array, the intermediate array has been removed.
+
+The correctness of fusion relies crucially on the language being
+\emph{pure}. If side effects where allowed in the indexing function
+fusion would not be correct.
+
+There are two different ways of implementing Pull arrays in the
+literature. The simplest one comes from using Pull arrays in an
+embedded langauge, i.e. when the array language is implemented as a
+library in another host language. Examples of such languages are
+Pan\cite{elliott2003compiling}, Feldspar\cite{Axelsson:2010:Feldspar},
+Obsidian\cite{Svensson:2011:Obsidian} and
+Nikola\cite{Mainland:2010:Nikola}. By using the technique of
+implementing Pull arrays as \emph{shallow embeddings} on top of a
+\emph{deeply embedded} code language, fusion comes completely for free
+\cite{svenningsson2013combining}.
+
+In the array library Repa\cite{keller2010regular}, compiler supported
+rewrite rules are used to implement fusion \cite{jones2001playing}.
+
 \subsection{Higher dimensions}
+
+The first uses of Pull arrays used a fixed number of dimensions,
+typically either one or two. However, the Repa library introduced a
+new expressive notion of higher dimensionality for Push arrays
+\cite{keller2010regular}. The number dimensions of an array, referred
+to as the \emph{shape}, are determined statically in the type
+system. The advantage of having the shape as part of the type is that
+any program which produces arrays with ill-defined shapes can be ruled
+out. A potential downside is that enforcing shapes in the type system might
+be overly constraining and exclude useful programs. A key innovation in
+Repa is the notion on \emph{shape polymorphism} which makes it
+possible to write functions which accepts arrays of any shape. Below
+shows the definition of the type of shapes. It is a variation on how
+it is represented in Feldspar.
+
+\begin{verbatim}
+data Z
+data i :. sh
+
+data Shape sh where
+  Z :: Shape Z
+  (:.) :: Shape tail -> Int -> Shape (tail :. Int)
+\end{verbatim}
+
+The first two data declarations introduces new types, \verb!Z! and
+\verb!:.!, without any constructors. They are used to create
+snoc-lists on the type level, the definition of \verb!Shape!.  The
+type \verb!Shape! is a recursive data type with two constructors. The
+first constructor \verb!Z! indicates that the shape has zero
+dimensions.  The second constructor \verb!:.! adds one dimension to
+another shape, and stores how many elements there are in that
+dimension. The type \verb!Shape! has a type parameter which is a snoc
+list with one element for each dimension.
+
+\begin{verbatim}
+data Pull sh a = Pull (Shape sh -> a) (Shape sh)
+
+map :: (a -> b) -> Pull sh a -> Pull sh a
+map f (Pull ixf sh) = Pull (f . ixf) sh
+
+zipWith :: (a -> b -> b) -> 
+           Pull sh a -> Pull sh b -> Pull sh c
+zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
+  = Pull (\sh -> f (ixf1 sh) (ixf2 sh2))
+\end{verbatim}
+
 
 \section{Comparison}
 
 \subsection{Types}
+\label{sec:types}
 
-\subsection{\(\psi\) reductions and fusion}
+\subsection{\(\psi\)-reductions and fusion}
+\label{sec:normalization}
 
 \subsection{Higher dimensions}
+\label{sec:highdim}
 
 \subsection{Functions}
+\label{sec:notation}
 
 \begin{tabular}{|@{}l|l@{}|}
 \hline
