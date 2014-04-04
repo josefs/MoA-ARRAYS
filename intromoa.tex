@@ -81,6 +81,7 @@ then
 is an array of dimensionality $n-k$ and $q$ selects among the possible 
 choices for the first $k$ axes. In MoA zero origin indexing is assumed.
 For example, if $A$ is the $3$ by $5$ by $4$ array
+\small
 \[ \left [
 \begin{array}{lrrrr}
 0 & 1 &  2 & 3  \\
@@ -103,6 +104,7 @@ For example, if $A$ is the $3$ by $5$ by $4$ array
 52 & 53 & 54 & 55 \\
 56 & 57 & 58 & 59
 \end{array} \right ] \]
+\normalsize
 then
 \[
      <1> \psi A = \left [  \begin{array}{rrrr}
@@ -320,7 +322,8 @@ Some MoA operations defined by {\em psi} are found in Fig.\ref{moa}.
 
 %\break
 \begin{figure}[h]
-\scriptsize
+%\scriptsize
+\tiny
 \begin{tabular}{|l|l|l|}
 \hline\hline
 {\bf Symbol} & {\bf Name}& {\bf Description} \\ \hline
@@ -379,6 +382,45 @@ operations.  The dimension upon which operations are to be performed is often
 called the {\it axis} of operation.  The result of $\Omega$ is a unary or 
 binary operation.
 
+\subsection*{From Semantic to Operational Forms}
 
+%Section with Psi  Correspondence Theorem and thinking in arrays *\
 
+Consider the expression
 
+\begin{eqnarray}
+X & = & (2 \take ( \Phi A)) \times ( 1 \drop (\Phi A)) 
+\end{eqnarray}
+That is, take the first two planes after reversing A along the primary axis then multiply that array by the last two 
+planes after reversing A. We want to concurrently perform both 5 by 4 multiplications. 
+A is the array previously defined with shape $<3\;5\;4>$.
+Suppose also that A is in shared memory and accessible to 2 processors.
+First, we {\em Psi-Reduce} our expression to its Denotational Normal Form (DNF) or semantic 
+normal form. This normal form can be used to prove the equivalence of  two array expressions.
+
+Get shape: 
+\begin{eqnarray}
+\rho X & = & \rho (2 \take (\Phi A)) \nonumber \\
+& = & 2 \cat ((1\drop (\rho ( \Phi A)))) \nonumber \\
+&=& 2 \cat ((1 \drop (\rho  A))) \nonumber \\
+&=& 2 \cat <\;5\;4> \nonumber \\
+&=& <2\;4\;5>
+\end{eqnarray}
+Now that we have the {\em shape}, we can {Psi-Reduce}.
+\[ \forall \;\;\; i,j,k \;\;\; \ni \;\;\; 0 \;\;\;\leq i,j,k < \;\;\;<2\;4\;5> \]
+\[<i\;j\;k> \psi X \]
+\begin{eqnarray}
+& =&<i\;j\;k> \psi (2 \take ( \Phi A)) \times ( 1 \drop (\Phi A)) \nonumber \\
+&=&<j\;k> \psi (<i> \psi (2 \take ( \Phi A)) \times ( 1 \drop (\Phi A)) )\nonumber \\
+&= &<j\;k> \psi ((<i> \psi ( 2 \take (\Phi A))) \nonumber \\
+&&\;\;\;\;\;\times ( <i> \psi ( 1 \drop (\Phi A)))) \nonumber \\
+&= &<j\;k> \psi (( <i> \psi (\Phi A)) \times (<i+1> \psi (\Phi A))) \nonumber \\
+&=&<j\;k> \psi ((<((\rho A)[0] - 1 - i)> \psi A ) \nonumber \\
+&& \;\;\;\;\;\times  (<((\rho A)[0] - 1 -( i + 1))> \psi A ) )\nonumber \\
+&=&<j\;k> \psi ((< 2-i> \psi A ) \times (<1-i>  \psi A) )
+ \end{eqnarray}
+\normalsize
+This is the DNF, or semantic normal form. To proceed further we must know more about the data, i.e. layout, and architecture. 
+\subsection{Applying the Psi Correspondence Theorem\cite{jen94}]
+We now want to {\em transform} the DNF to a {\em Generic} Operational Normal Form (ONF) or way 
+to {\em build the code}. 
