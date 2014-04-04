@@ -1,4 +1,4 @@
-\begin{thebibliography}{42}
+\begin{thebibliography}{47}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -20,14 +20,26 @@ J.~Ankner and J.~D. Svenningsson.
 \newblock \emph{SIGPLAN Not.}, 48\penalty0 (12):\penalty0 1--12, Sept. 2013.
 \newblock ISSN 0362-1340.
 
-\bibitem[Axelsson et~al.(2010)Axelsson, Claessen, Sheeran, Svenningsson,
-  Engdal, and Persson]{Axelsson:2010:Feldspar}
+\bibitem[Axelsson et~al.(2010{\natexlab{a}})Axelsson, Claessen, D{\'e}vai,
+  Horv{\'a}th, Keijzer, Lyckeg{\aa}rd, Persson, Sheeran, Svenningsson, and
+  Vajda]{axelsson2010feldspar}
+E.~Axelsson, K.~Claessen, G.~D{\'e}vai, Z.~Horv{\'a}th, K.~Keijzer,
+  B.~Lyckeg{\aa}rd, A.~Persson, M.~Sheeran, J.~Svenningsson, and A.~Vajda.
+\newblock Feldspar: A domain specific language for digital signal processing
+  algorithms.
+\newblock In \emph{Formal Methods and Models for Codesign (MEMOCODE), 2010 8th
+  IEEE/ACM International Conference on}, pages 169--178. IEEE,
+  2010{\natexlab{a}}.
+
+\bibitem[Axelsson et~al.(2010{\natexlab{b}})Axelsson, Claessen, Sheeran,
+  Svenningsson, Engdal, and Persson]{Axelsson:2010:Feldspar}
 E.~Axelsson, K.~Claessen, M.~Sheeran, J.~Svenningsson, D.~Engdal, and
   A.~Persson.
 \newblock The design and implementation of {F}eldspar -- an embedded language
   for digital signal processing.
 \newblock In J.~Hage and M.~T. Moraz{\'a}n, editors, \emph{IFL}, volume 6647 of
-  \emph{Lecture Notes in Computer Science}, pages 121--136. Springer, 2010.
+  \emph{Lecture Notes in Computer Science}, pages 121--136. Springer,
+  2010{\natexlab{b}}.
 \newblock ISBN 978-3-642-24275-5.
 
 \bibitem[Berkling(1990)]{berkling}
@@ -64,6 +76,12 @@ L.~Coffin.
   in complex scientific problems, 1994.
 \newblock UMR Undergraduate Research Program(OURE).
 
+\bibitem[Elliott et~al.(2003)Elliott, Finne, and De~Moor]{elliott2003compiling}
+C.~Elliott, S.~Finne, and O.~De~Moor.
+\newblock Compiling embedded languages.
+\newblock \emph{Journal of Functional Programming}, 13\penalty0 (3):\penalty0
+  455--481, 2003.
+
 \bibitem[et~al(1996)]{aachen96}
 L.~M. et~al.
 \newblock The {PGI--PSI} project: Preprocessing optimizations for existing and
@@ -76,6 +94,12 @@ L.~M. et~al.
 S.~Gerhart.
 \newblock \emph{Verification of APL Programs}.
 \newblock PhD thesis, CMU, 1972.
+
+\bibitem[Gill et~al.(1993)Gill, Launchbury, and Peyton~Jones]{gill1993short}
+A.~Gill, J.~Launchbury, and S.~L. Peyton~Jones.
+\newblock A short cut to deforestation.
+\newblock In \emph{Proceedings of the conference on Functional programming
+  languages and computer architecture}, pages 223--232. ACM, 1993.
 
 \bibitem[Guibas and Wyatt(1978)]{guibas}
 L.~J. Guibas and D.~K. Wyatt.
@@ -97,6 +121,12 @@ A.~Hassitt and L.~Lyon.
 \bibitem[Jenkins(94)]{jenk94}
 M.~Jenkins, 94.
 \newblock Research Communications.
+
+\bibitem[Jones et~al.(2001)Jones, Tolmach, and Hoare]{jones2001playing}
+S.~P. Jones, A.~Tolmach, and T.~Hoare.
+\newblock Playing by the rules: rewriting as a practical optimisation technique
+  in ghc.
+\newblock In \emph{Haskell Workshop}, volume~1, pages 203--233, 2001.
 
 \bibitem[K.E.Iverson(1962)]{iverson62}
 K.E.Iverson.
@@ -221,11 +251,6 @@ H.~Najafzadeh and L.~R. Mullin.
 \newblock In \emph{Proceedings of the Seventh Workshop on Compilers for
   Parallel Computers, CPC98}, Linkoping, Sweden, 1998.
 
-\bibitem[Perlis(1975)]{perlis}
-A.~Perlis.
-\newblock Steps towards an {APL} compiler.
-\newblock Technical Report~24, Yale University, 1975.
-
 \bibitem[Pottinger et~al.(1994)Pottinger, Eatherton, Kelly, Mullin, and
   Schifelbein]{hardy2}
 H.~Pottinger, W.~Eatherton, J.~Kelly, L.~Mullin, and T.~Schifelbein.
@@ -240,6 +265,12 @@ H.~Pottinger, W.~Eatherton, J.~Kelly, L.~Mullin, and R.~Ziegler.
   m}athematics of {A}rrays.
 \newblock In \emph{Proceedings of the {IEEE} {C}ircuits and {S}ystems {S}ympos\
   ium {ISCAS95}}, May 1995.
+
+\bibitem[Svenningsson and Axelsson(2013)]{svenningsson2013combining}
+J.~Svenningsson and E.~Axelsson.
+\newblock Combining deep and shallow embedding for edsl.
+\newblock In \emph{Trends in Functional Programming}, pages 21--36. Springer,
+  2013.
 
 \bibitem[Svensson et~al.(2011)Svensson, Sheeran, and
   Claessen]{Svensson:2011:Obsidian}
@@ -267,5 +298,11 @@ H.-C. Tu.
 H.-C. Tu and A.~J. Perlis.
 \newblock {FAC}: A functional {APL} language.
 \newblock \emph{IEEE Software}, 3\penalty0 (1):\penalty0 36--45, Jan. 1986.
+
+\bibitem[Wadler(1990)]{wadler1990deforestation}
+P.~Wadler.
+\newblock Deforestation: Transforming programs to eliminate trees.
+\newblock \emph{Theoretical computer science}, 73\penalty0 (2):\penalty0
+  231--248, 1990.
 
 \end{thebibliography}

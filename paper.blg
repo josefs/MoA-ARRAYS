@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99c (TeX Live 2009)
 The top-level auxiliary file: paper.aux
 The style file: abbrvnat.bst
 I couldn't open database file workshop.bib
----line 33 of file paper.aux
+---line 44 of file paper.aux
  : \bibdata{bibliography,hpf,paper1,workshop
  :                                          }
 I'm skipping whatever remains of this command
@@ -60,45 +60,45 @@ I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in thesis
 Warning--empty year in thesis
 Warning--empty year in fftharry
-You've used 42 entries,
+You've used 47 entries,
             2773 wiz_defined-function locations,
-            844 strings with 11467 characters,
-and the built_in function-call counts, 16937 in all, are:
-= -- 1510
-> -- 884
-< -- 42
-+ -- 306
-- -- 264
-* -- 1208
-:= -- 2635
-add.period$ -- 138
-call.type$ -- 42
-change.case$ -- 204
-chr.to.int$ -- 42
-cite$ -- 88
-duplicate$ -- 871
-empty$ -- 1478
-format.name$ -- 328
-if$ -- 3586
-int.to.chr$ -- 1
+            876 strings with 12663 characters,
+and the built_in function-call counts, 20360 in all, are:
+= -- 1829
+> -- 1088
+< -- 47
++ -- 375
+- -- 327
+* -- 1492
+:= -- 3115
+add.period$ -- 156
+call.type$ -- 47
+change.case$ -- 240
+chr.to.int$ -- 46
+cite$ -- 98
+duplicate$ -- 1026
+empty$ -- 1748
+format.name$ -- 398
+if$ -- 4342
+int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 30
-newline$ -- 221
-num.names$ -- 172
-pop$ -- 478
+missing$ -- 36
+newline$ -- 246
+num.names$ -- 192
+pop$ -- 560
 preamble$ -- 1
-purify$ -- 169
+purify$ -- 200
 quote$ -- 0
-skip$ -- 626
+skip$ -- 752
 stack$ -- 0
-substring$ -- 338
-swap$ -- 101
-text.length$ -- 12
+substring$ -- 518
+swap$ -- 146
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 452
+type$ -- 507
 warning$ -- 3
-while$ -- 153
+while$ -- 184
 width$ -- 0
-write$ -- 553
+write$ -- 622
 (There were 13 error messages)
