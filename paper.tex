@@ -229,9 +229,28 @@ Nikola\cite{Mainland:2010:Nikola}. By using the technique of
 implementing Pull arrays as \emph{shallow embeddings} on top of a
 \emph{deeply embedded} code language, fusion comes completely for free
 \cite{svenningsson2013combining}.
-
 In the array library Repa\cite{keller2010regular}, compiler supported
 rewrite rules are used to implement fusion \cite{jones2001playing}.
+
+Fusion is a powerful optimization which allows programming on a high
+level by composing functions without paying an performance penalty.
+
+Fusion effectively makes Pull arrays \emph{virtual} in that they will
+not be represented in memory. All intermediate arrays will be
+remove. But sometimes it is important to keep an array in memory, not
+least to produce the final result. For this reason, Pull arrays
+provide a function, variously known as \verb!force!, \verb!memorize!
+  or \verb!store!. We will refer to it as \verb!store! here. The
+  functional semantics of \verb!store! is the identity function,
+  i.e. it simply returns the same array as it was given. However, as a
+  side effect it stores the array to memory.
+
+A subtle point about \verb!store! is that the language is still pure
+with this function. The reason is that there is no way to observe from
+within the language whether an array is stored to memory or
+not. Therefore, the side-effect of \verb!store! cannot affect the
+value of a computation.
+
 
 \subsection{Higher dimensions}
 
@@ -286,8 +305,17 @@ zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
 \subsection{Types}
 \label{sec:types}
 
+* Only one element type in MoA
+* Not much in the way of types in MoA
+
+* Shapes are arrays in MoA whereas they are a different type with Pull arrays
+
 \subsection{\(\psi\)-reductions and fusion}
 \label{sec:normalization}
+
+The similarity between MoA and Pull arrays is most clear when
+considering Operatonal Normal Form (ONF). Recall that ONF means that 
+
 
 \subsection{Higher dimensions}
 \label{sec:highdim}
