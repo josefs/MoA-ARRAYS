@@ -1,0 +1,308 @@
+\begin{thebibliography}{47}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[the()]{thesis}
+L. M. R. Mullin, A Mathematics of Arrays, Ph.D. Thesis, Syracuse University,
+  December 1988.
+
+\bibitem[Abrams(1970)]{abrams70}
+P.~Abrams.
+\newblock \emph{An APL Machine}.
+\newblock PhD thesis, Stanford University, 1970.
+
+\bibitem[Ankner and Svenningsson(2013)]{Ankner:2013:AnEDSL}
+J.~Ankner and J.~D. Svenningsson.
+\newblock An edsl approach to high performance {H}askell programming.
+\newblock \emph{SIGPLAN Not.}, 48\penalty0 (12):\penalty0 1--12, Sept. 2013.
+\newblock ISSN 0362-1340.
+
+\bibitem[Axelsson et~al.(2010{\natexlab{a}})Axelsson, Claessen, D{\'e}vai,
+  Horv{\'a}th, Keijzer, Lyckeg{\aa}rd, Persson, Sheeran, Svenningsson, and
+  Vajda]{axelsson2010feldspar}
+E.~Axelsson, K.~Claessen, G.~D{\'e}vai, Z.~Horv{\'a}th, K.~Keijzer,
+  B.~Lyckeg{\aa}rd, A.~Persson, M.~Sheeran, J.~Svenningsson, and A.~Vajda.
+\newblock Feldspar: A domain specific language for digital signal processing
+  algorithms.
+\newblock In \emph{Formal Methods and Models for Codesign (MEMOCODE), 2010 8th
+  IEEE/ACM International Conference on}, pages 169--178. IEEE,
+  2010{\natexlab{a}}.
+
+\bibitem[Axelsson et~al.(2010{\natexlab{b}})Axelsson, Claessen, Sheeran,
+  Svenningsson, Engdal, and Persson]{Axelsson:2010:Feldspar}
+E.~Axelsson, K.~Claessen, M.~Sheeran, J.~Svenningsson, D.~Engdal, and
+  A.~Persson.
+\newblock The design and implementation of {F}eldspar -- an embedded language
+  for digital signal processing.
+\newblock In J.~Hage and M.~T. Moraz{\'a}n, editors, \emph{IFL}, volume 6647 of
+  \emph{Lecture Notes in Computer Science}, pages 121--136. Springer,
+  2010{\natexlab{b}}.
+\newblock ISBN 978-3-642-24275-5.
+
+\bibitem[Berkling(1990)]{berkling}
+K.~Berkling.
+\newblock Arrays and the lambda calculus.
+\newblock Technical report, CASE Center and School of CIS, Syracuse University,
+  1990.
+
+\bibitem[Budd(1991)]{budd91}
+T.~Budd.
+\newblock A parallel intermediate representation based on {L}ambda expressions.
+\newblock \emph{Arrays, Functional Languages and Parallel Systems}, 1991.
+
+\bibitem[Budd(1984)]{budd84}
+T.~A. Budd.
+\newblock An {APL} compiler for a vector processor.
+\newblock \emph{ACM Transactions on Programming Languages and Systems},
+  6\penalty0 (3):\penalty0 297--313, July 1984.
+\newblock ISSN 0164-0925.
+
+\bibitem[Claessen et~al.(2012)Claessen, Sheeran, and
+  Svensson]{Claessen:2012:Expressive}
+K.~Claessen, M.~Sheeran, and B.~J. Svensson.
+\newblock Expressive array constructs in an embedded gpu kernel programming
+  language.
+\newblock In \emph{Proceedings of the 7th Workshop on Declarative Aspects and
+  Applications of Multicore Programming}, DAMP '12, pages 21--30, New York, NY,
+  USA, 2012. ACM.
+\newblock ISBN 978-1-4503-1117-5.
+
+\bibitem[Coffin(1994)]{coffin94}
+L.~Coffin.
+\newblock Designing a new programming methodology for optimizing array accesses
+  in complex scientific problems, 1994.
+\newblock UMR Undergraduate Research Program(OURE).
+
+\bibitem[Elliott et~al.(2003)Elliott, Finne, and De~Moor]{elliott2003compiling}
+C.~Elliott, S.~Finne, and O.~De~Moor.
+\newblock Compiling embedded languages.
+\newblock \emph{Journal of Functional Programming}, 13\penalty0 (3):\penalty0
+  455--481, 2003.
+
+\bibitem[et~al(1996)]{aachen96}
+L.~M. et~al.
+\newblock The {PGI--PSI} project: Preprocessing optimizations for existing and
+  new {F}90 intrinsics in {HPF} using compositional symmetric indexing of the
+  {P}si calculus.
+\newblock In M.~Gerndt, editor, \emph{Proceedings of the 6th Workshop on
+  Compilers for Parallel Computers}. Forschungszentrum Julich GmbH, 1996.
+
+\bibitem[Gerhart(1972)]{gerhart}
+S.~Gerhart.
+\newblock \emph{Verification of APL Programs}.
+\newblock PhD thesis, CMU, 1972.
+
+\bibitem[Gill et~al.(1993)Gill, Launchbury, and Peyton~Jones]{gill1993short}
+A.~Gill, J.~Launchbury, and S.~L. Peyton~Jones.
+\newblock A short cut to deforestation.
+\newblock In \emph{Proceedings of the conference on Functional programming
+  languages and computer architecture}, pages 223--232. ACM, 1993.
+
+\bibitem[Guibas and Wyatt(1978)]{guibas}
+L.~J. Guibas and D.~K. Wyatt.
+\newblock Compilation and delayed evaluation in {APL}.
+\newblock In \emph{Conference Record of the Fifth Annual {ACM} Symposium o\ n
+  Principles of Programming Languages}, pages 1--8, Jan. 1978.
+
+\bibitem[Hains and Mullin(1993)]{hm92}
+G.~Hains and L.~Mullin.
+\newblock Parallel functional programming with arrays.
+\newblock \emph{The British Computer Journal of the British Computer Society:
+  the society of information systems engineering}, 36\penalty0 (22), 1993.
+
+\bibitem[Hassitt and Lyon(1972)]{lyon}
+A.~Hassitt and L.~Lyon.
+\newblock Efficient evaluation of array subscripts of arrays.
+\newblock \emph{IBM Journal of Research and Development}, January 1972.
+
+\bibitem[Jenkins(94)]{jenk94}
+M.~Jenkins, 94.
+\newblock Research Communications.
+
+\bibitem[Jones et~al.(2001)Jones, Tolmach, and Hoare]{jones2001playing}
+S.~P. Jones, A.~Tolmach, and T.~Hoare.
+\newblock Playing by the rules: rewriting as a practical optimisation technique
+  in ghc.
+\newblock In \emph{Haskell Workshop}, volume~1, pages 203--233, 2001.
+
+\bibitem[K.E.Iverson(1962)]{iverson62}
+K.E.Iverson.
+\newblock \emph{A Programming Language}.
+\newblock Wiley, New York, 1962.
+
+\bibitem[Keller et~al.(2010)Keller, Chakravarty, Leshchinskiy, Peyton~Jones,
+  and Lippmeier]{keller2010regular}
+G.~Keller, M.~M. Chakravarty, R.~Leshchinskiy, S.~Peyton~Jones, and
+  B.~Lippmeier.
+\newblock Regular, shape-polymorphic, parallel arrays in {H}askell.
+\newblock \emph{ACM Sigplan Notices}, 45\penalty0 (9):\penalty0 261--272, 2010.
+
+\bibitem[Lewis et~al.(1976)Lewis, Rosenkrantz, and Stearns]{djr}
+P.~Lewis, D.~Rosenkrantz, and R.~Stearns.
+\newblock \emph{Compiler Design Theory}.
+\newblock Addison-Wesley, 1976.
+
+\bibitem[Lippmeier and Keller(2011)]{lippmeier2011efficient}
+B.~Lippmeier and G.~Keller.
+\newblock Efficient parallel stencil convolution in {H}askell.
+\newblock \emph{ACM SIGPLAN Notices}, 46\penalty0 (12):\penalty0 59--70, 2011.
+
+\bibitem[Mainland and Morrisett(2010)]{Mainland:2010:Nikola}
+G.~Mainland and G.~Morrisett.
+\newblock Nikola: embedding compiled {GPU} functions in {Haskell}.
+\newblock In J.~Gibbons, editor, \emph{Proceedings of the 3rd {ACM} {SIGPLAN}
+  Symposium on Haskell, Haskell 2010, Baltimore, {MD}, {USA}, 30 September
+  2010}, pages 67--78. ACM, 2010.
+\newblock ISBN 978-1-4503-0252-4.
+
+\bibitem[Marlow et~al.(2010)]{marlow2010haskell}
+S.~Marlow et~al.
+\newblock Haskell 2010 language report.
+\newblock \emph{Available onli ne http://www. haskell.
+  org/onlinereport/haskell2010}, 2010.
+
+\bibitem[McMahon(1995)]{mcmahon95}
+T.~McMahon.
+\newblock Mathematical formulation of general partitioning of multi-dimensional
+  arrays to multi-dimensional architectures using the {P}si calculus, 1995.
+\newblock Undergraduate Honors Thesis.
+
+\bibitem[Miller(1979)]{miller}
+T.~Miller.
+\newblock Tentative compilation: A design for an {APL} compiler.
+\newblock Technical Report 133, Yale University, 1979.
+
+\bibitem[Mullin(1993)]{mul93}
+L.~Mullin.
+\newblock The {P}si compiler project.
+\newblock In \emph{Workshop on Compilers for Parallel Computers}. TU Delft,
+  Holland, 1993.
+
+\bibitem[Mullin and Jenkins(1996)]{muljen94}
+L.~Mullin and M.~Jenkins.
+\newblock Effective data parallel computation using the {P}si calculus.
+\newblock \emph{Concurrency -- Practice and Experience}, September 1996.
+
+\bibitem[Mullin and McMahon(1994)]{lee95}
+L.~Mullin and T.~McMahon.
+\newblock Parallel algorithm derivation and program transformation in a
+  preprocessing compiler for scientific languages.
+\newblock Technical Report CSC-94-29, University of Missouri-Rolla, Dept of CS,
+  1994.
+
+\bibitem[Mullin and Thibault(1994)]{mul94}
+L.~Mullin and S.~Thibault.
+\newblock Reduction semantics for array expressions: The {P}si compiler.
+\newblock Technical Report CSC 94-05, Dept. of CS, University of
+  Missouri-Rolla, 1994.
+
+\bibitem[Mullin et~al.(1996)Mullin, Kluge, and Scholtz]{mul96}
+L.~Mullin, W.~Kluge, and S.~Scholtz.
+\newblock On programming scientific applications in {SAC} -- a functional
+  language extended by a subsystem for high level array operations.
+\newblock In \emph{Proceedings of the 8th International Workshop on
+  Implementation of Functional Languages, Bonn/Germany}, 1996.
+
+\bibitem[Mullin et~al.(2002)Mullin, Rutledge, and Bond]{ll2}
+L.~Mullin, E.~Rutledge, and R.~Bond.
+\newblock Monolithic compiler experiments using {C}$++$ {E}xpression
+  {T}emplates.
+\newblock In \emph{Proceedings of the High Performance Embedded Computing
+  Workshop HPEC 2002}, MIT Lincoln Laboratory, Lexington, MA, 2002.
+
+\bibitem[Mullin(1988)]{mul88}
+L.~M.~R. Mullin.
+\newblock \emph{A Mathematics of Arrays}.
+\newblock PhD thesis, Syracuse University, December 1988.
+
+\bibitem[Mullin(1991)]{mul91}
+L.~R. Mullin.
+\newblock Psi, the indexing function: A basis for {FFP} with arrays.
+\newblock In \emph{Arrays, Functional Languages, and Parallel Systems}. Kluwer
+  Academic Publishers, 1991.
+
+\bibitem[Mullin(2005)]{Mul03}
+L.~R. Mullin.
+\newblock A uniform way of reasoning about array--based computation in radar:
+  Algebraically connecting the hardware/software boundary.
+\newblock \emph{Digital Signal Processing}, 15:\penalty0 466--520, 2005.
+
+\bibitem[Mullin et~al.()Mullin, III, Rosenkrantz, and Raynolds]{fftharry}
+L.~R. Mullin, H.~B.~H. III, D.~J. Rosenkrantz, and J.~E. Raynolds.
+\newblock A transformation-based approach for the design of
+  parallel/distributed scientific software: the {FFT}.
+\newblock http://trr.albany.edu/documents/TR00002 (submitted to Computer
+  Physics Communications).
+
+\bibitem[Mullin et~al.(1993)Mullin, Dooling, Sandberg, and Thibault]{mdst93}
+L.~R. Mullin, D.~Dooling, E.~Sandberg, and S.~Thibault.
+\newblock Formal methods for scheduling, routing and communication protocol.
+\newblock In \emph{Proceedings of the Second International Symposium on High
+  Performance Distributed Computing (HPDC-2)}. IEEE Computer Society, July
+  1993.
+
+\bibitem[Najafzadeh and Mullin(1998)]{haleh98}
+H.~Najafzadeh and L.~R. Mullin.
+\newblock A dimension independent general partitioning algorithm to support
+  {HPF} directives.
+\newblock In \emph{Proceedings of the Seventh Workshop on Compilers for
+  Parallel Computers, CPC98}, Linkoping, Sweden, 1998.
+
+\bibitem[Pottinger et~al.(1994)Pottinger, Eatherton, Kelly, Mullin, and
+  Schifelbein]{hardy2}
+H.~Pottinger, W.~Eatherton, J.~Kelly, L.~Mullin, and T.~Schifelbein.
+\newblock Hardware assits for high performance computing using {A} {M}athe\
+  matics of {A}rrays.
+\newblock In \emph{Proceedings of {INEL}94}, 1994.
+
+\bibitem[Pottinger et~al.(1995)Pottinger, Eatherton, Kelly, Mullin, and
+  Ziegler]{hardy1}
+H.~Pottinger, W.~Eatherton, J.~Kelly, L.~Mullin, and R.~Ziegler.
+\newblock An {FPGA} based reconfigurable coprocessor board utilizing {A} {\
+  m}athematics of {A}rrays.
+\newblock In \emph{Proceedings of the {IEEE} {C}ircuits and {S}ystems {S}ympos\
+  ium {ISCAS95}}, May 1995.
+
+\bibitem[Svenningsson and Axelsson(2013)]{svenningsson2013combining}
+J.~Svenningsson and E.~Axelsson.
+\newblock Combining deep and shallow embedding for edsl.
+\newblock In \emph{Trends in Functional Programming}, pages 21--36. Springer,
+  2013.
+
+\bibitem[Svensson et~al.(2011)Svensson, Sheeran, and
+  Claessen]{Svensson:2011:Obsidian}
+J.~Svensson, M.~Sheeran, and K.~Claessen.
+\newblock Obsidian: {A} domain specific embedded language for parallel
+  programming of graphics processors.
+\newblock In S.-B. Scholz and O.~Chitil, editors, \emph{Implementation and
+  Application of Functional Languages}, volume 5836 of \emph{Lecture Notes in
+  Computer Science}, pages 156--173. Springer, 2011.
+\newblock ISBN 978-3-642-24451-3.
+
+\bibitem[Sylvester(1884)]{sylvester}
+J.~Sylvester.
+\newblock Lectures on the principles of universal algebra.
+\newblock In \emph{American Journal of Mathematics: VI}, volume~4. reprinted in
+  Mathematical Papers, 1884.
+
+\bibitem[Tu(1985)]{tu3}
+H.-C. Tu.
+\newblock \emph{{FAC}: A Functional Array Calculator and it's Applicaton to
+  {APL} and Functional Programming}.
+\newblock PhD thesis, Yale University, 1985.
+
+\bibitem[Tu and Perlis(1986)]{tu2}
+H.-C. Tu and A.~J. Perlis.
+\newblock {FAC}: A functional {APL} language.
+\newblock \emph{IEEE Software}, 3\penalty0 (1):\penalty0 36--45, Jan. 1986.
+
+\bibitem[Wadler(1990)]{wadler1990deforestation}
+P.~Wadler.
+\newblock Deforestation: Transforming programs to eliminate trees.
+\newblock \emph{Theoretical computer science}, 73\penalty0 (2):\penalty0
+  231--248, 1990.
+
+\end{thebibliography}
