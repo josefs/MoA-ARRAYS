@@ -68,7 +68,7 @@
 \authorinfo{Lenore M. Mullin}
            {Emeritus Professor\\Department of Computer Science\\
 University at Albany, SUNY}
-           {lenore@albany.edu}
+           {lenore@cs.albany.edu}
 
 \maketitle
 
@@ -139,7 +139,7 @@ data Pull a = Pull { ixf    :: (Int -> a)
 
 Arrays are represented as functions from index to element. We refer to
 this function as an \emph{index function}. Additionally arrays also
-have a length.
+has a length.
 
 This representation has several advantages:
 \begin{itemize}

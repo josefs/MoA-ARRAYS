@@ -51,7 +51,7 @@ arrays\cite{mul91,budd91,hm92,mul93,mul94,mul96}.
 
 
 MoA and the Psi Calculus, as a theory,  have  also been used to describe and verify 
-hardware\cite{hardy1,hardy2,fftharry}, describe the partitioning and
+hardware\cite{hardy1,hardy2,DBLP:journals/corr/abs-0811-2535}, describe the partitioning and
 scheduling of array operations (and their costs)\cite{mdst93,lee95,aachen96,coffin94,ll2,mcmahon95,haleh98}, 
 and the formulation of parallel and distributed processing\cite{Mul03}. 
 MoA and $\psi$-Calculus, can be used to abstract complex processor memory layouts 
@@ -448,5 +448,5 @@ a[( (2-i) \times  20)  + \iota 20 ] \nonumber \\
 \end{eqnarray}
 \normalsize
 Which breaks the indexing into start, stride, and stop, a universal hardware description and easiliy transformed
-to the mnemonics used at any hardware level ~\cite{fftharry}.
-We could add more dimensions to analyze prefetching, buffer sizes, vectorDBLP registers, cache, etc.
+to the mnemonics used at any hardware leveDBLP:journals/corr/abs-0811-2535l ~\cite{DBLP:journals/corr/abs-0811-2535}.
+We could add more dimensions to analyze prefetching, buffer sizes, vector registers, cache, etc.
