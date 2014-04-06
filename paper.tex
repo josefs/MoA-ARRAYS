@@ -195,6 +195,7 @@ arrays make it particularly simple to achieve fusion. It simply
 amounts to inlining the definitions of functions.
 
 As an example of fusion consider the example
+\newline
 \verb!map (*2) (map (*5) arr)!, where each element of the array
 \verb!arr! is first multiplied by five and then again by
 two. Conceptually, there is an intermediate array created after the
@@ -214,7 +215,7 @@ Pull ((*2) . (*5) . ixf) l)
 The result is a single Pull array, the intermediate array has been removed.
 
 The correctness of fusion relies crucially on the language being
-\emph{pure}. If side effects where allowed in the indexing function
+\emph{pure}. If side effects were allowed in the indexing function
 fusion would not be correct.
 
 There are two different ways of implementing Pull arrays in the
@@ -235,7 +236,7 @@ level by composing functions without paying an performance penalty.
 
 Fusion effectively makes Pull arrays \emph{virtual} in that they will
 not be represented in memory. All intermediate arrays will be
-remove. But sometimes it is important to keep an array in memory, not
+removed. But sometimes it is important to keep an array in memory, not
 least to produce the final result. For this reason, Pull arrays
 provide a function, variously known as \verb!force!, \verb!memorize!
   or \verb!store!. We will refer to it as \verb!store! here. The
@@ -301,14 +302,14 @@ zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
 
 In this section we relate MoA and Pull arrays. 
 
-An initial observation is that MoA and Pull arrays where developed for
+An initial observation is that MoA and Pull arrays were developed for
 different purposes and that can be seen already by looking at the
-notation. Mathematics of arrays have first and foremost been used for
+notation. Mathematics of Arrays has first and foremost been used for
 calculating array programs by hand. This is reflected in the short
 names and succinct notation which works very well when doing
 pencil-and-paper proofs.
 
-Pull arrays on the other hand where conveived in the context of a
+Pull arrays on the other hand were conveived in the context of a
 typed functional language. The notation is completely inherited from
 the syntax of Haskell \cite{marlow2010haskell}.
 
@@ -318,6 +319,7 @@ the syntax of Haskell \cite{marlow2010haskell}.
 When it comes to types MoA keeps things very simple. There are two
 types: arrays and scalars. Furthermore, scalars and singleton arrays
 are identified.
+% scalars are arrays from an MoA and Psi Calculus perspective. 
 
 Pull arrays inherits the type discipline from the language they are
 implemented in. When used in Haskell it means that they have a rich
