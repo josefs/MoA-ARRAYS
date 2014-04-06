@@ -254,13 +254,13 @@ value of a computation.
 The first uses of Pull arrays used a fixed number of dimensions,
 typically either one or two. However, the Repa library introduced a
 new expressive notion of higher dimensionality for Push arrays
-\cite{keller2010regular}. The number dimensions of an array, referred
+\cite{keller2010regular}. The number of dimensions of an array, referred
 to as the \emph{shape}, are determined statically in the type
 system. The advantage of having the shape as part of the type is that
 any program which produces arrays with ill-defined shapes can be ruled
 out. A potential downside is that enforcing shapes in the type system might
 be overly constraining and exclude useful programs. A key innovation in
-Repa is the notion on \emph{shape polymorphism} which makes it
+Repa is the notion of \emph{shape polymorphism} which makes it
 possible to write functions which accepts arrays of any shape. Below
 shows the definition of the type of shapes. It is a variation on how
 it is represented in Feldspar.
