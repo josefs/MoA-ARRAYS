@@ -249,7 +249,6 @@ within the language whether an array is stored to memory or
 not. Therefore, the side-effect of \verb!store! cannot affect the
 value of a computation.
 
-
 \subsection{Higher dimensions}
 
 The first uses of Pull arrays used a fixed number of dimensions,
@@ -300,20 +299,73 @@ zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
 
 \section{Comparison}
 
+In this section we relate MoA and Pull arrays. 
+
+An initial observation is that MoA and Pull arrays where developed for
+different purposes and that can be seen already by looking at the
+notation. Mathematics of arrays have first and foremost been used for
+calculating array programs by hand. This is reflected in the short
+names and succinct notation which works very well when doing
+pencil-and-paper proofs.
+
+Pull arrays on the other hand where conveived in the context of a
+typed functional language. The notation is completely inherited from
+the syntax of Haskell \cite{marlow2010haskell}.
+
 \subsection{Types}
 \label{sec:types}
 
-* Only one element type in MoA
-* Not much in the way of types in MoA
+When it comes to types MoA keeps things very simple. There are two
+types: arrays and scalars. Furthermore, scalars and singleton arrays
+are identified.
 
-* Shapes are arrays in MoA whereas they are a different type with Pull arrays
+Pull arrays inherits the type discipline from the language they are
+implemented in. When used in Haskell it means that they have a rich
+type system to utilize. First and foremost, Pull arrays are
+parametric, meaning that they can carry elements of any type. In
+particular the elements can be Pull arrays as another way of
+representing higher dimensional arrays. This representation is seldom
+used as it has poor performance.
 
-\subsection{\(\psi\)-reductions and fusion}
+Shapes in Pull arrays are represented by a completely different type,
+whereas in MoA shapes are simply arrays. Representing shapes as arrays
+is challenging in a typed language such as Haskell because it leads to
+a form of infinite recursion and while there are a number of way to
+break the recursion we have yet to find a way that does so and retains
+the efficiency and simplicity of Pull arrays.
+
+\subsection{DNF, \(\psi\)-reductions and fusion}
 \label{sec:normalization}
 
-The similarity between MoA and Pull arrays is most clear when
-considering Operatonal Normal Form (ONF). Recall that ONF means that 
+The correspondence between MoA and Pull arrays is most clear when
+considering Denotaional Normal Form (DNF), \(\psi\)-reductions and
+fusion. Both formalisms define operations on arrays by how to index
+into the array. In MoA, the indexing function \(\psi\) is used,
+whereas for Pull arrays operations are defined as functions from index
+to the element at that index. These two forms are equivalent.
 
+Pull arrays are always kept on the form of an indexing function and a
+length. This representation is preserved for all operations. In MoA,
+arrays are treated as abstract during derivations. After calculations,
+\(\psi\)-reductions are performed to bring the expression into
+Denotational Normal Form. DNF is equivalent to Pull arrays, it shows
+how to compute an element from an array directly from an index.
+
+The process of applying \(\psi\)-reductions corresponds to performing
+fusion on Pull arrays. In both cases operations are inlined until
+there is a single expression for computing an element from an array
+given an index.
+
+Pull arrays use the function \verb!store! to prevent fusion and store
+an array in memory. MoA deals with memory differently. All arrays
+which are supposed to be allocated in memory are given a separate
+definition.
+
+The last step in calculating a program in MoA is to derive an
+Operational Normal Form which is explicit about how the array is laid
+out in memory. Pull arrays do not have anything corresponding to
+ONF. Instead, the decision of how the array is laid out is done by the
+compiler, which uses a pre-defined convention.
 
 \subsection{Higher dimensions}
 \label{sec:highdim}
@@ -326,45 +378,45 @@ considering Operatonal Normal Form (ONF). Recall that ONF means that
 MoA & Feldspar
 \\
 \hline
-δ & dim . extent
+δ & \verb!dim . extent!
 \\
-ρ & extent
+ρ & \verb!extent!
 \\
-ιξⁿ & -- generalized enumFromTo
+ιξⁿ & generalized \verb!enumFromTo!
 \\
-ψ & index
+ψ & generalized \verb!index!
 \\
 rav & -- flattens to a one-dimensional array
 \\
-γ & toIndex
+γ & \verb!toIndex!
 \\
-γ' & fromIndex
+γ' & \verb!fromIndex!
 \\
-$s \: \hat{ρ} \: ξ$ & reshape
+$s \: \hat{ρ} \: ξ$ & \verb!reshape!
 \\
-π x & product
+π x & \verb!product!
 \\
-τ & size
+τ & \verb!size!
 \\
 ++ & ++
 \\
-ξ₁ f ξ₂ & zipWith f ξ₁ ξ₁
+ξ₁ f ξ₂ & \verb!zipWith f! ξ₁ ξ₁
 \\
-σ f ξ & map f ξ
+σ f ξ & \verb!map f! ξ
 \\
-ξ f σ & map f ξ
+ξ f σ & \verb!map f! ξ
 \\
-$\bigtriangleup$ & take
+$\bigtriangleup$ & \verb!take!
 \\
-$\bigtriangledown$ & drop
+$\bigtriangledown$ & \verb!drop!
 \\
-$op^{red}$ & fold
+$op^{red}$ & \verb!fold op!
 \\
-Φ & reverse
+Φ & \verb!reverse!
 \\
-Θ & rotate
+Θ & \verb!rotate!
 \\
-$\varobslash$ & -- generalized transpose
+$\varobslash$ & generalized \verb!transpose!
 \\
 $f Ω_d ξ$ & -- Apply $f$ along the dimension $d$ of $ξ$
 \\
