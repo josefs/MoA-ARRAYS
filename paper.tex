@@ -316,9 +316,10 @@ the syntax of Haskell \cite{marlow2010haskell}.
 \subsection{Types}
 \label{sec:types}
 
-When it comes to types MoA keeps things very simple. There are two
-types: arrays and scalars. Furthermore, scalars and singleton arrays
-are identified.
+When it comes to types MoA keeps things very simple. There is just one
+type, arrays.  Scalars are arrays;  their shape is the empty vector. Consequently, we have the identify given any array, $\xi$
+\[( \iota (\rho \xi)  )\psi \xi \equiv \xi\]
+That is, given an array's shape, all indices can be generated to index the entire array.
 % scalars are arrays from an MoA and Psi Calculus perspective. 
 
 Pull arrays inherits the type discipline from the language they are
