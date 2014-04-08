@@ -452,5 +452,12 @@ a[( (2-i) \times  20)  + \iota 20 ] \nonumber \\
 \end{eqnarray}
 \normalsize
 which transforms the indexing into start, stride, and stop, a universal hardware description and easiliy transformed
-to the mnemonics used at any hardware level ~\cite{fftharry}.
-We could add more dimensions to analyze prefetching, buffer sizes, vector registers, cache, etc.
+to the mnemonics used at any hardware level ~\cite{fftharry}. 
+
+The  {\em iota} operation depicts  20 sequential 
+accesses. If we wanted to map these operations to other than  scalar registers
+we could conceptually add more dimensions to analyze prefetching, buffer sizes, vector registers, caches, etc.
+Suppose in this example we have two vector registers to do the addition, both with length 4, we could
+abstract this operation into a 5 by 4 where we can now analyze the cost of 5 vector register loads and
+stores and determine if that is more cost effective than 20 scalar operations. Thus prior to code generation we
+{\em could} analyze which menomnic to map to from the ONF. 
