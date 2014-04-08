@@ -425,12 +425,14 @@ Now that we have the {\em shape}, we can {Psi-Reduce}.
 This is the DNF, or semantic normal form. To proceed further we must know more about the data, i.e. layout, and architecture. 
 \subsection* {Applying the Psi Correspondence Theorem: PCT}
 We now want to {\em transform} the DNF above to a {\em Generic} Operational Normal Form (ONF) or way 
-to {\em build the code}.  The PCT~\cite{muljen94}, which generalizes the mapping function 
-gamma, $\gamma$,   turns short indices into start, stops, and strides.
+to {\em build the code}.  Recall that $\gamma$ maps a {\em full} index , $\vec i$, of an arbitrary array $A$ to an 
+offset from the start of A, $@A$ in memory,  denoted by $a[\gamma(\vec i;(\rho A))]$.
+The PCT~\cite{muljen94},  generalizes the mapping function 
+gamma, $\gamma$,   and turns {\em short} indices into start, stops, and strides.
 Note that we still use {\em Psi-Reduction} but now just on vectors.  
 We start by analyzing the shape of the result in conjunction with the indicies involved
 in the computation and observe that the indices for $j$ and $k$ are contiguous allowing
-us to only use the primary axis index in the mapping.
+us to only use the primary axis index, a short index, in the mapping.
 Thus, let Y denote $(<2-i> \psi A ) \times ( <1-i> \psi A)$. Then the shape of Y, i.e.
 \begin{eqnarray}
 \rho Y= 1 \drop (\rho A) = 1 \drop <3\;5\;4> = <5\;4>
