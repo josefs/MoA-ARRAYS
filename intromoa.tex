@@ -314,8 +314,8 @@ The expression can be simplified using the definitions:
          &   = & <2> \psi (<1> \psi \Phi A) \nonumber \\
          &  = & <2> \psi (<3 - 1 - 1 > \psi A) \nonumber \\
         &   = & <1 \; 2> \psi A  \nonumber \\
-&=&\mbox {Thus,} \;\;\forall \;\; j \;\;\ni \;\;0 \leq j < 4 \nonumber \\
-&=& = <j>  \psi <1 \; 2> \psi A  \nonumber \\
+\mbox {Thus,} \;\;\forall \;\; j \;\;\ni \;\;0 \leq j < 4 \nonumber \\
+&=&  <j>  \psi <1 \; 2> \psi A  \nonumber \\
 &=& <1\:2\;j\;> \psi A \nonumber\\
 \end{eqnarray}
 
@@ -323,58 +323,7 @@ This process of simplifying expression (1) in terms of
 its Cartesian coordinates is called {\em Psi Reduction}. The operations of MoA
 have been designed so that all expressions can be reduced to a minimal
 normal form~\cite{mul88}, the DNF.
-Some MoA operations defined by {\em psi} are found in Fig.\ref{moa}.
 
-%\break
-\begin{figure}[h]
-%\scriptsize
-\tiny
-\begin{tabular}{|l|l|l|}
-\hline\hline
-{\bf Symbol} & {\bf Name}& {\bf Description} \\ \hline
-$\delta$ & Dimensionality & Returns the number of dimensions of an array.\\ \hline
-$\rho$ & Shape & Returns a vector of the upper bounds \\
-& &or sizes of each dimension in an array. \\ \hline
-$\iota \xi^n$  & Iota & When $n=0$(scalar),
-returns a vector containing elements\\
-& & $0$, to $\xi^0 - 1$. When $n = 1$(vector), returns an \\
-& & array of indices  defined by the shape vector $\xi^1$ \\ \hline
-$\psi$ & Psi & The main indexing function of the Psi Calculus \\
-& & which defines all operations in MoA.   Returns a scalar \\
-& & if a full index is provided, a sub-array otherwise. \\ \hline
-\mbox{rav} & Ravel & vectorizes a multi-dimensional array based   \\
-&&on an  array's layout($\gamma_{row},\gamma_{col},\gamma_{sparse}, ...$)\\ \hline
-$\gamma$ & Gamma & Translates indices into offsets given a shape. \\ \hline
-$\gamma^{'}$ & Gamma Inverse & Translates offsets into indices given a shape. \\ \hline
-$\vec s \rshp \xi $ & Reshape& Changes the shape vector of an array,
- possibly affecting  \\
-& &its dimensionality. Reshape depends on
-layout($\gamma$). \\ \hline
-$\pi \vec x$ & Pi & Returns a scalar and is equivalent to $\prod_{i=0}^{(\tau x)-1}x[i]$ \\ \hline
-$\tau$& Tau & Returns the number of components in an array,($\tau \xi \equiv
-\pi (\rho \xi) $) \\ \hline
-$\xi_l \cat \xi_r $ & Catenate& Concatenates two arrays over their
-primary axis. \\ \hline
-$\xi_l f \xi_r $ & Point-wise  & A data parallel application of $f$ is performed \\
-&Extension &  between all elements of the arrays.\\ \hline
-$\sigma f \xi_r $ & Scalar Extension & $\sigma$ is used with
-every component of $\xi_r$ in the data parallel \\
-$\xi_l f \sigma$ & &application of $f$. \\ \hline
-$\take$&Take& Returns a sub-array from the beginning or end of an array\\
-& & based on its argument being positive or negative. \\ \hline
-$\drop$ & Drop & The inverse of Take \\ \hline
-$_{op} \mbox{red}$&Reduce& Reduce an array's dimension by one by applying \\
-& & op over the primary axis of an array. \\ \hline
-$\Phi$& Reverse& Reverses the components of an array. \\ \hline
-$\Theta $& Rotate & Rotates, or shifts cyclically, components of an
-array. \\ \hline
-$\transpose$ & Transpose & Transposes the elements of an array based on \\
-&&a given permutation vector \\ \hline
-$\Omega$& Omega& Applies a unary or binary function to array argument(s) \\
-&&given partitioning information. $\Omega$ is used to perform all operations \\&& (defined over the primary axis only) over all dimensions. \\ \hline
-\end{tabular}
-\caption{\label{moa}Summary of MoA Operations}
-\end{figure}
 
 \subsection*{Higher Order Operations}
 
