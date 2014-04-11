@@ -291,14 +291,16 @@ possible to write functions which accepts arrays of any shape. Below
 shows the definition of the type of shapes. It is a variation on how
 it is represented in Feldspar.
 
-\begin{verbatim}
+\begin{small}
+\begin{Verbatim}
 data Z
 data i :. sh
 
 data Shape sh where
   Z :: Shape Z
   (:.) :: Shape tail -> Int -> Shape (tail :. Int)
-\end{verbatim}
+\end{Verbatim}
+\end{small}
 
 The first two data declarations introduces new types, \verb!Z! and
 \verb!:.!, without any constructors. They are used to create
@@ -318,7 +320,8 @@ shapes, as long as they are the same shape.  The function
 \verb!reverse! is particularly noteworthy because the type reflects
 that the input and output arrays need to have at least one dimension.
 
-\begin{verbatim}
+\begin{small}
+\begin{Verbatim}
 data Pull sh a = Pull (Shape sh -> a) (Shape sh)
 
 map :: (a -> b) -> Pull sh a -> Pull sh a
@@ -333,7 +336,8 @@ reverse :: Pull (sh :. Data Length) a ->
            Pull (sh :. Data Length) a
 reverse (Pull ixf sh@(_ :. l)) =
  Pull (\(sh' :. i) -> ixf (sh' :. (l - i - 1))) sh
-\end{verbatim}
+\end{Verbatim}
+\end{small}
 
 
 \section{Comparison}
