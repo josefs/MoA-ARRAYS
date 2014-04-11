@@ -160,29 +160,27 @@ can operate on arrays of any type of element.
 
 \begin{figure}
 \begin{verbatim}
--- Mapping a function over an array
 map :: (a -> b) -> Pull a -> Pull b
 map f (Pull ixf l) = Pull (f . ixf) l
 
--- Apply a binary operation itemwise on two arrays
 zipWith :: (a -> b -> c)
         -> Pull a -> Pull b -> Pull c
 zipWith f (Pull ixf1 l1) (Pull ixf2 l2)
   = Pull (\i -> f (ixf1 i) (ixf2 i)) (min l1 l2)
 
--- Takes the n first elements of an array
 take :: Int -> Pull a -> Pull a
 take n (Pull ixf l) = Pull ixf (min n l)
 
--- Drops the n first elements of an array
 drop :: Int -> Pull a -> Pull a
 drop n (Pull ixf l)
   = Pull (\i -> ixf (i + n)) (max (l - n) 0)
 
--- Rotate an array k steps to the left
 rotate :: Int -> Pull a -> Pull a
 rotate k (Pull ixf l)
   = Pull (\i -> ixf ((i + k) `mod` l)) l
+
+reverse :: Pull a -> Pull a
+reverse (Pull ixf l) = Pull (\i -> ixf (l - i - 1) l
 
 enumFromTo :: Int -> Int -> Pull Int
 enumFromTo f t = Pull (\i -> i + f) (t - f + 1)
@@ -227,22 +225,6 @@ The correctness of fusion relies crucially on the language being
 \emph{pure}. If side effects were allowed in the indexing function
 fusion would not be correct.
 
-There are two different ways of implementing Pull arrays in the
-literature. The simplest one comes from using Pull arrays in an
-embedded langauge, i.e. when the array language is implemented as a
-library in another host language. Examples of such languages are
-Pan\cite{elliott2003compiling}, Feldspar\cite{Axelsson:2010:Feldspar},
-Obsidian\cite{Svensson:2011:Obsidian} and
-Nikola\cite{Mainland:2010:Nikola}. By using the technique of
-implementing Pull arrays as \emph{shallow embeddings} on top of a
-\emph{deeply embedded} code language, fusion comes completely for free
-\cite{svenningsson2013combining}.
-In the array library Repa\cite{keller2010regular}, compiler supported
-rewrite rules are used to implement fusion \cite{jones2001playing}.
-
-Fusion is a powerful optimization which allows programming on a high
-level by composing functions without paying a performance penalty.
-
 Fusion effectively makes Pull arrays \emph{virtual} in that they will
 not be represented in memory. All intermediate arrays will be
 removed. But sometimes it is important to keep an array in memory
@@ -260,6 +242,22 @@ with this function. The reason is that there is no way to observe from
 within the language whether an array is stored to memory or
 not. Therefore, the side-effect of \verb!store! cannot affect the
 value of a computation.
+
+\subsection{Implementing Fusion}
+
+There are two different ways of implementing Pull arrays in the
+literature. The simplest one comes from using Pull arrays in an
+embedded langauge, i.e. when the array language is implemented as a
+library in another host language. Examples of such languages are
+Pan\cite{elliott2003compiling}, Feldspar\cite{Axelsson:2010:Feldspar},
+Obsidian\cite{Svensson:2011:Obsidian} and
+Nikola\cite{Mainland:2010:Nikola}. By using the technique of
+implementing Pull arrays as \emph{shallow embeddings} on top of a
+\emph{deeply embedded} code language, fusion comes completely for free
+\cite{svenningsson2013combining}.
+In the array library Repa\cite{keller2010regular}, compiler supported
+rewrite rules are used to implement fusion \cite{jones2001playing}.
+
 
 \subsection{Higher dimensions}
 
@@ -298,7 +296,12 @@ list with one element for each dimension.
 
 Below we show how higher dimensional Pull arrays can be defined using
 the \verb!Shape! type. We also show some functions adapted for the new
-representation.
+representation. Note the shape polymorphism in the definitions of
+\verb!map! and \verb!zipWith!. They can work with arrays of any
+shapes, as long as they are the same shape.  The function
+\verb!reverse! is particularly noteworthy because the type reflects
+that the input and output arrays need to have at least one dimension.
+
 \begin{verbatim}
 data Pull sh a = Pull (Shape sh -> a) (Shape sh)
 
@@ -309,6 +312,11 @@ zipWith :: (a -> b -> b) ->
            Pull sh a -> Pull sh b -> Pull sh c
 zipWith f (Pull ixf1 sh1) (Pull ixf2 sh2)
   = Pull (\sh -> f (ixf1 sh) (ixf2 sh2))
+
+reverse :: Pull (sh :. Data Length) a ->
+           Pull (sh :. Data Length) a
+reverse (Pull ixf sh@(_ :. l)) =
+ Pull (\(sh' :. i) -> ixf (sh' :. (l - i - 1))) sh
 \end{verbatim}
 
 
