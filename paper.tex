@@ -194,9 +194,8 @@ enumFromTo f t = Pull (\i -> i + f) (t - f + 1)
 As mentioned, one of the most important advantages of Pull arrays is
 that they support
 fusion\cite{gill1993short,axelsson2010feldspar,keller2010regular}. Fusion
-is a program transformation which removes intermediate data structures
-and is a decendant of deforestation
-\cite{wadler1990deforestation}. Fusion supercedes transformations such
+is a program transformation which removes intermediate data structures.
+Fusion supercedes transformations such
 as loop fusion in optimizing compilers for imperative languages.  Pull
 arrays make it particularly simple to achieve fusion. It simply
 amounts to inlining the definitions of functions.
