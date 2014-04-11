@@ -399,7 +399,23 @@ is part of the type.
 \label{sec:notation}
 
 Figure \ref{fig:rosetta} gives a translation between function names
-used in MoA and Pull arrays.
+used in MoA and Pull arrays. The intention of this figure is to work
+as a rosetta stone, helping to translate from one formalism to the
+other.
+
+As can be seen in the figure, not all operations in MoA have a
+corresponding function in the Pull array literature. Some of these
+functions are missing because Pull arrays do not have a notion
+corresponding to ONF in MoA. In particular, the function $rav$ is used
+in ONF to decide on the particular layout of the array, and this step
+is implicit for Pull arrays. However, $\Omega$ is a good candidate to
+transfer to the formalism of Pull arrays.
+
+The difference between ψ in MoA and \verb!index! i Pull arrays is that
+ψ can be used with partial indexes, a central notion in MoA. Pull
+arrays solve this problem in a more roundabout way, using a notion of
+\emph{slices} \cite{keller2010regular}. We leave out the explanation
+of slices for reasons of space.
 
 \begin{figure}
 \begin{center}
@@ -412,11 +428,11 @@ MoA & Feldspar
 \\
 ρ & \verb!extent!
 \\
-ιξⁿ & generalized \verb!enumFromTo!
+ιξⁿ & \verb!enumFromTo!
 \\
 ψ & generalized \verb!index!
 \\
-rav & -- flattens to a one-dimensional array
+rav & -- No corresponding function
 \\
 γ & \verb!toIndex!
 \\
@@ -448,7 +464,7 @@ $op^{red}$ & \verb!fold op!
 \\
 $\varobslash$ & generalized \verb!transpose!
 \\
-$f Ω_d ξ$ & -- Apply $f$ along the dimension $d$ of $ξ$
+$f Ω_d ξ$ & -- No corresponding function
 \\
 \hline
 \end{tabular}
@@ -456,8 +472,6 @@ $f Ω_d ξ$ & -- Apply $f$ along the dimension $d$ of $ξ$
 \caption{A correspondence between functions in MoA and Pull arrays}
 \label{fig:rosetta}
 \end{figure}
-
-\subsection{Example programs}
 
 \section{Conclusion and Future work}
 
