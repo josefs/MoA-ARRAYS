@@ -25,30 +25,8 @@
 MoA, an acoronym for {\em A Mathematics of Arrays\cite{thesis}}, is a theory of arrays with both an 
 algebra and a calculus of 
 indexing based on shapes, i.e. sizes of each dimension. The index calculus, refered to as {\em The Psi Calculus}, 
-gets its names from the {\em Psi}  function which is the foundational function in the theory. The name {\em Psi} 
-was inspired by Dirac's {\em Psi Vectors} and his communications with Einstein to have a mathematical way to reason
-about them. These results began with the awareness that Iverson's APL\cite{iverson62}
+gets its names from the {\em Psi}  function which is the foundational function in the theory. These results began with the awareness that Iverson's APL\cite{iverson62}
 was inspired by Sylvester's Universal Algebra\cite{sylvester} and the fact that he and Cayley invented matrices.
-The programming language, APL, embodied Ken's notation into an interpretive computing environment. It was at this point
-that theoretical anamolies were introduced. 
-
-Not only did  Ken believe that APL's array algebra was the ideal basis for a programming language, he (and others) believed that
-an ideal machine language supported array operations. This led to HP building an 
-APL machine based on Phil Abram's dissertation\cite{abrams70}. Abrams was the first to identify ways 
-to define an algebra of arrays based on shapes; others attempted to
-put closure on his work\cite{lyon,guibas}. Abrams believed that if array operations were based on 
-indexing with  shapes, all  indexing in the array expression could be  composed
-and  thus could minimize the creation (and deletion) of temporary arrays,
-a huge overhead. One of the reasons HP's APL Machine did not succeed was that this analysis was done at run time.
-It was  Alan Perlis, and later others\cite{miller,budd84},  who realized that these optimizations should be done at compile time. Attempts at compilation led Perlis to realize that  anomalies in the language~\cite{gerhart} 
-made it difficult to optimize and impossible to verify correctness of 
-programs leading him to recommend a functional array calculator based on the lambda 
-calculus\cite{tu2,tu3}. This awareness led to Mullin's collaborations with Klaus Berkling to combine MoA, Psi Calculus, and
-the Lambda Calculus, theoretically an ideal enviornment\cite{berkling} and basis for a 
-functional programming language with 
-arrays\cite{mul91,budd91,hm92,mul93,mul94,mul96}. 
-
-
 
 MoA and the Psi Calculus, as a theory,  have  also been used to describe and verify 
 hardware\cite{hardy1,hardy2,fftharry}, describe the partitioning and

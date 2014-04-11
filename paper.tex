@@ -109,8 +109,9 @@ particular we will highlight the following points:
   arrays (section \ref{sec:pull}).
 \item The two formalisms are compared with respect to types (section
   \ref{sec:types}), fusion/\(\psi\)-reduction (section
-  \ref{sec:normalization}), how they deal with higher dimensions
-  (section \ref{sec:highdim}) and notation (section \ref{sec:notation}).
+  \ref{sec:normalization}), 
+  how they deal with higher dimensions (section \ref{sec:highdim})
+  and notation (section \ref{sec:notation}).
 \end{itemize}
 
 We would like to stress that we are not looking to declare a
@@ -153,6 +154,10 @@ This representation has several advantages:
   understand than monolithic array processing code.
 \end{itemize}
 
+Figure \ref{fig:pullex} shows some examples of functions on Pull
+arrays. Things to note are that most functions are polymorphic; they
+can operate on arrays of any type of element.
+
 \begin{figure}
 \begin{verbatim}
 -- Mapping a function over an array
@@ -178,8 +183,12 @@ drop n (Pull ixf l)
 rotate :: Int -> Pull a -> Pull a
 rotate k (Pull ixf l)
   = Pull (\i -> ixf ((i + k) `mod` l)) l
+
+enumFromTo :: Int -> Int -> Pull Int
+enumFromTo f t = Pull (\i -> i + f) (t - f + 1)
 \end{verbatim}
 \caption{Example functions on pull arrays}
+\label{fig:pullex}
 \end{figure}
 
 \subsection{Fusion}
@@ -204,11 +213,11 @@ as follows:
 
 \begin{verbatim}
 map (*2) (map (*5) arr)
-=> { arr }
+  => { arr }
 map (*2) (map (*5) (Pull ixf l)
-=> { map }
+  => { map }
 map (*2) (Pull ((*5) . ixf) l)
-=> { map }
+  => { map }
 Pull ((*2) . (*5) . ixf) l)
 \end{verbatim}
 
@@ -285,6 +294,9 @@ another shape, and stores how many elements there are in that
 dimension. The type \verb!Shape! has a type parameter which is a snoc
 list with one element for each dimension.
 
+Below we show how higher dimensional Pull arrays can be defined using
+the \verb!Shape! type. We also show some functions adapted for the new
+representation.
 \begin{verbatim}
 data Pull sh a = Pull (Shape sh -> a) (Shape sh)
 
@@ -317,7 +329,7 @@ the syntax of Haskell \cite{marlow2010haskell}.
 \label{sec:types}
 
 When it comes to types MoA keeps things very simple. There is just one
-type, arrays.  Scalars are arrays;  their shape is the empty vector. Consequently, we have the identify given any array, $\xi$
+type, arrays.  Scalars are arrays;  their shape is the empty vector. Consequently, we have the identity given any array, $\xi$
 \[( \iota (\rho \xi)  )\psi \xi \equiv \xi\]
 That is, given an array's shape, all indices can be generated to index the entire array.
 % scalars are arrays from an MoA and Psi Calculus perspective. 
@@ -329,13 +341,6 @@ parametric, meaning that they can carry elements of any type. In
 particular the elements can be Pull arrays as another way of
 representing higher dimensional arrays. This representation is seldom
 used as it has poor performance.
-
-Shapes in Pull arrays are represented by a completely different type,
-whereas in MoA shapes are simply arrays. Representing shapes as arrays
-is challenging in a typed language such as Haskell because it leads to
-a form of infinite recursion and while there are a number of way to
-break the recursion we have yet to find a way that does so and retains
-the efficiency and simplicity of Pull arrays.
 
 \subsection{DNF, \(\psi\)-reductions and fusion}
 \label{sec:normalization}
@@ -372,6 +377,18 @@ compiler, which uses a pre-defined convention.
 
 \subsection{Higher dimensions}
 \label{sec:highdim}
+
+Shapes in Pull arrays are represented by a completely different type,
+whereas in MoA shapes are simply arrays. Representing shapes as arrays
+is challenging in a typed language such as Haskell because it leads to
+a form of infinite recursion and while there are a number of way to
+break the recursion we have yet to find a way that does so and retains
+the efficiency and simplicity of Pull arrays.
+
+Apart from the differences in the type system, MoA and Pull arrays
+treat shapes relatively similar. The type of shapes in Pull arrays can
+be seen as just another representation of arrays, one where the length
+is part of the type.
 
 \subsection{Functions}
 \label{sec:notation}
@@ -428,15 +445,30 @@ $f Ω_d ξ$ & -- Apply $f$ along the dimension $d$ of $ξ$
 
 \subsection{Example programs}
 
-\section{Related work}
+\section{Conclusion and Future work}
 
-\section{Future work}
+Mathematics of Arrays and Pull arrays are a lot more closely related
+than what they first might appear. In this paper we have outlined the
+relationship between fusion and \(\psi\)-reduction, Pull arrays and
+Denotational Normal Form, and the various types of operations used.
+Our hope is that this paper will help researchers from both
+communities interact and learn from each other.
 
-\section{Conclusion}
+We have identified a few points where MoA and Pull arrays can learn
+from each other. The treatment of higher dimensions in MoA is more
+thorough and there are operations like $\Omega$ which haven't appeared
+in the literature on Pull arrays.
 
-\acks
+Pull arrays has a dual representation, Push arrays
+\cite{Claessen:2012:Expressive}. It can deal with some of the
+shortcomings of Pull arrays, in particular more efficient
+concatenation and sharing of computations between array elements. It
+would be interesting to see how the ideas of Push array carries over
+to MoA.
 
-Acknowledgments.
+%% \acks
+
+%% Acknowledgments.
 
 % We recommend abbrvnat bibliography style.
 
