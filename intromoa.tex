@@ -122,8 +122,7 @@ integers with each item less than the corresponding item of $s_A$.
 	We will use a tuple notation (omitting commas) to describe vectors of a fixed length.
 For example,
 \[                  <i \; j \; k> \]
-denotes a vector of length three. $<>$ will denote the empty vector which is 
-also sometimes written as $\Theta$.
+denotes a vector of length three. $<>$ will denote the empty vector.
 
 	For every $n$-dimensional array $A$, there is a vector of the items of $A$,
 which we denote by the corresponding lower case letter, here $a$. The length of the vector of
@@ -185,8 +184,6 @@ define a few functions on vectors:
 \> \> \>and when $k<0$ the vector of the last $k$ items of $u$ \\
 \>$k \;\drop \;u$ \>  \> when $k \geq 0$ the vector of $t_u - k$ last items of $u$,(called{ \em drop}) \\
 \> \> \>and when $k<0$ the vector of the first $t_u - |k|$ items of $u$ \\
-\>$k \;\theta \;u$ \>  \>  when $k \geq 0$  the vector of $(k  \drop  u) \cat ( k \take u ) $\\
-\> \> \>and when $k<0$ the vector or $(k \take u ) \cat ( k \drop u ) $
 \end{tabbing}
 
 \begin{definition}
@@ -269,39 +266,6 @@ This definition of $\Phi$ does a reversal of the 0th axis of A.
 
 Note
 also that all operations are over the 0th axis. The operator $\Omega$~\cite{mul88} extends operations over all other dimensions.
-\subsubsection*{Example}
-Consider the evaluation of the following expression using the
-3 by 5 by 4 array, $A$, introduced in Section~\ref{indshp}.
-\begin{eqnarray}
-             <1\;\; 2> \psi (2 \take \Phi A) 
-\end{eqnarray}
-where A is the array given in the previous section.
-The shape of the result is 
-\begin{eqnarray}
-                & &  2 \drop s_{(2 \take \Phi A)} \nonumber \\
-                & = & 2 \drop (<2> \cat (1 \drop s_{\Phi A} )) \nonumber \\
-               & = & 2 \drop (<2> \cat (1 \drop s_A)) \nonumber \\
-               & = & 2 \drop (<2> \cat <5\; 4>) \nonumber \\
-               & = & 2 \drop <2\; 5 \;4> \nonumber \\
-              &  = &<4> . 
-\end{eqnarray}
-The expression can be simplified using the definitions:
-\begin{eqnarray}
-          &&   <1\; 2> \psi (2 \take \Phi A) \nonumber \\
-           & = &  <1 \; 2> \psi \Phi A \nonumber \\
-         &   = & <2> \psi (<1> \psi \Phi A) \nonumber \\
-         &  = & <2> \psi (<3 - 1 - 1 > \psi A) \nonumber \\
-        &   = & <1 \; 2> \psi A  \nonumber \\
-\mbox {Thus,} \;\;\forall \;\; j \;\;\ni \;\;0 \leq j < 4 \nonumber \\
-&=&  <j>  \psi <1 \; 2> \psi A  \nonumber \\
-&=& <1\:2\;j\;> \psi A \nonumber\\
-\end{eqnarray}
-
-This process of simplifying expression (1) in terms of
-its Cartesian coordinates is called {\em Psi Reduction}. The operations of MoA
-have been designed so that all expressions can be reduced to a minimal
-normal form~\cite{mul88}, the DNF.
-
 
 \subsection*{Higher Order Operations}
 
