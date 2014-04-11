@@ -34,6 +34,7 @@
 \usepackage{stmaryrd}
 \usepackage[mathletters]{ucs}
 \usepackage[utf8x]{inputenc}
+\usepackage{fancyvrb}
 
 \begin{document}
 
@@ -132,11 +133,13 @@ of the central abstractions in this line of work is \emph{pull
 (we use Haskell \cite{marlow2010haskell} to demonstrate functions
 programs).
 
-\begin{verbatim}
+\begin{small}
+\begin{Verbatim}
 data Pull a = Pull { ixf    :: (Int -> a)
                    , length :: Int
                    }
-\end{verbatim}
+\end{Verbatim}
+\end{small}
 
 Arrays are represented as functions from index to element. We refer to
 this function as an \emph{index function}. Additionally arrays also
@@ -159,7 +162,8 @@ arrays. Things to note are that most functions are polymorphic; they
 can operate on arrays of any type of element.
 
 \begin{figure}
-\begin{verbatim}
+\begin{small}
+\begin{Verbatim}
 map :: (a -> b) -> Pull a -> Pull b
 map f (Pull ixf l) = Pull (f . ixf) l
 
@@ -184,7 +188,8 @@ reverse (Pull ixf l) = Pull (\i -> ixf (l - i - 1) l
 
 enumFromTo :: Int -> Int -> Pull Int
 enumFromTo f t = Pull (\i -> i + f) (t - f + 1)
-\end{verbatim}
+\end{Verbatim}
+\end{small}
 \caption{Example functions on pull arrays}
 \label{fig:pullex}
 \end{figure}
@@ -200,25 +205,37 @@ as loop fusion in optimizing compilers for imperative languages.  Pull
 arrays make it particularly simple to achieve fusion. It simply
 amounts to inlining the definitions of functions.
 
-As an example of fusion consider the example
-\newline
-\verb!map (*2) (map (*5) arr)!, where each element of the array
-\verb!arr! is first multiplied by five and then again by
-two. Conceptually, there is an intermediate array created after the
-first \verb!map! but thanks to fusion it will be removed. Fusion will proceed
-as follows:
+As an example of fusion consider the example from the section which
+was used to illustrate $\psi$-reductions. Here is how it is written
+using Pull arrays for the one-dimensional case:\\
+{\small
+\verb!zipWith (*) (take 2 (reverse a)) (drop 1 (reverse a))!}.\\
+Conceptually there are many intermediate arrays here, but they will be
+removed by fusion. Fusion will proceed by inlining the definition
+of the functions as follows:
 
-\begin{verbatim}
-map (*2) (map (*5) arr)
+\begin{small}
+\begin{Verbatim}
+zipWith (*) (take 2 (reverse a))
+            (drop 1 (reverse a))
   => { arr }
-map (*2) (map (*5) (Pull ixf l)
-  => { map }
-map (*2) (Pull ((*5) . ixf) l)
-  => { map }
-Pull ((*2) . (*5) . ixf) l)
-\end{verbatim}
+zipWith (*) (take 2 (reverse (Pull ixf l))
+            (drop 2 (reverse (Pull ixf l)))
+  => { reverse * 2 }
+zipWith (*) (take 2 (Pull (\i -> ixf (l - i - 1)) l))
+            (drop 1 (Pull (\i -> ixf (l - i - 1)) l))
+  => { take , drop }
+zipWith (*) (Pull (\i -> ixf (l - i - 1)) (min 2 l))
+            (Pull (\i -> ixf (l - i)) (max (l - 1) 0))
+  => { zipWith }
+Pull (\i -> ixf (l - i - 1) * ixf (l - i))
+  (min (min 2 l) (max (l - 1) 0))
+\end{Verbatim}
+\end{small}
 
-The result is a single Pull array, the intermediate array has been removed.
+The result is a single Pull array, the intermediate array has been
+removed. The result is the same in MoA, modulo syntax and the fact
+that we here use a one-dimensional array of unknown size.
 
 The correctness of fusion relies crucially on the language being
 \emph{pure}. If side effects were allowed in the indexing function
