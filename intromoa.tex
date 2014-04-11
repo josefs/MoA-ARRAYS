@@ -35,11 +35,7 @@ and the formulation of parallel and distributed processing\cite{Mul03}.
 MoA and $\psi$-Calculus, can be used to abstract complex processor memory layouts 
 for tensor/array expressions, reduce these expressions first to a semantic 
 normal form (Denotational Normal Form-DNF) then to an Operational Normal Form 
-(ONF). The ONF describes how to {\em build} the code using 
-{\em start, stop, stride}, and {\em count}: a universal machine abstraction.
-This is possible by {\em abstractly} lifting the dimension of an expression to include all aspects
-of a processor, memory, communication topology. For example, to map a 2-d array expression to
-n  processors we would lift the dimenion to 3-d. 
+(ONF). 
 %
 %
 %
@@ -98,12 +94,9 @@ then
 
 \[      <2\; 1\; 3> \psi A \; \; = \; \; 47 \]
 
-Most of the common array manipulation operations found in languages like Fortran90, Matlab, ZPL, etc.,
- can be defined from $\psi$ and a few elementary vector operations.
 
-	We now introduce notation to permit us to define $\psi$ formally and to develop the
-{\em Psi Correspondence Theorem}~\cite{muljen94}, which is central to the effective exploitation of MoA in array
-computations. We will use $A, B, ...$ to denote an array of numbers (integer, real, or complex).
+
+	We now introduce notation to permit us to define $\psi$ formally. We will use $A, B, ...$ to denote an array of numbers (integer, real, or complex).
 An array's dimensionality will be denoted by $d_A$ and will be assumed to 
 be $n$ if not specified.
 
@@ -136,15 +129,10 @@ total number of components, dimensionality and shape of a. } is
 \[                    t_a =  t_A . \]
 
 	The precise mapping of $A$ to $a$ is determined by a one-to-one 
-ordering function, $gamma$.  Although the choice of ordering is arbitrary, it is 
-essential in the following that a specific one be assumed. By convention 
-we assume the items of $A$ are placed in $a$ according to the lexicographic 
-ordering of the indices of $A$. This is often referred to 
-as $row \; major \; ordering$. 
-Many programming languages lay out the items of multidimensional
-arrays in memory in a contiguous segment using this ordering. 
-Fortran uses the ordering corresponding to a transposed array in which the 
-axes are reversed {\em column major}. Scalars are introduced as arrays with an empty shape vector.
+ordering function, $gamma$
+\footnote{There are a family of gamma functions: 
+$\gamma_{row}, \gamma_{column}, \gamma_{regular sparse}$, etc. In this case we assume row major ordering.}.  
+Scalars are introduced as arrays with an empty shape vector.
 
 There are two equivalent ways of describing an array $A$:
 \begin{description}
@@ -180,9 +168,9 @@ define a few functions on vectors:
 %\footnote{$\iota \vec n$ is also defined and  produces an array of 
 %cartesian coordinates~\cite{mul88}.}\\
 \>$\pi \; v$ \> \>a scalar which is the product of the components of v \\
-\>$k \;\take \;u$ \>\>	when $k \geq 0$ the vector of the first $k$ items of $u$,(called {\em take}) \\
+\>$k \;\take \;u$ \>\>	when $k \geq 0$ the vector of the first $k$ items of $u$) \\
 \> \> \>and when $k<0$ the vector of the last $k$ items of $u$ \\
-\>$k \;\drop \;u$ \>  \> when $k \geq 0$ the vector of $t_u - k$ last items of $u$,(called{ \em drop}) \\
+\>$k \;\drop \;u$ \>  \> when $k \geq 0$ the vector of $t_u - k$ last items of $u$) \\
 \> \> \>and when $k<0$ the vector of the first $t_u - |k|$ items of $u$ \\
 \end{tabbing}
 
