@@ -241,12 +241,14 @@ In the array library Repa\cite{keller2010regular}, compiler supported
 rewrite rules are used to implement fusion \cite{jones2001playing}.
 
 Fusion is a powerful optimization which allows programming on a high
-level by composing functions without paying an performance penalty.
+level by composing functions without paying a performance penalty.
 
 Fusion effectively makes Pull arrays \emph{virtual} in that they will
 not be represented in memory. All intermediate arrays will be
-removed. But sometimes it is important to keep an array in memory, not
-least to produce the final result. For this reason, Pull arrays
+removed. But sometimes it is important to keep an array in memory
+\footnote{Example: Indexing a huge transposed array that has a few rows and many columns. Non-materialization
+may cause many cache misses and page faults.}, 
+not least to produce the final result. For this reason, Pull arrays
 provide a function, variously known as \verb!force!, \verb!memorize!
   or \verb!store!. We will refer to it as \verb!store! here. The
   functional semantics of \verb!store! is the identity function,
