@@ -251,8 +251,8 @@ fusion would not be correct.
 Fusion effectively makes Pull arrays \emph{virtual} in that they will
 not be represented in memory. All intermediate arrays will be
 removed. But sometimes it is important to keep an array in memory
-\footnote{Example: Indexing a huge transposed array that has a few rows and many columns. Non-materialization
-may cause many cache misses and page faults.}, 
+\footnote{Example: Indexing a column of a huge transposed array that has a few rows and many columns. In this case, non-materialization
+may have long strides causing many cache misses and page faults.}, 
 not least to produce the final result. For this reason, Pull arrays
 provide a function, variously known as \verb!force!, \verb!memorize!
   or \verb!store!. We will refer to it as \verb!store! here. The
@@ -392,7 +392,7 @@ into the array. In MoA, the indexing function \(\psi\) is used,
 whereas for Pull arrays operations are defined as functions from index
 to the element at that index. These two forms are equivalent.
 
-Pull arrays are always kept on the form of an indexing function and a
+Pull arrays are always kept in the form of an indexing function and a
 length. This representation is preserved for all operations. In MoA,
 arrays are treated as abstract during derivations. After calculations,
 \(\psi\)-reductions are performed to bring the expression into
