@@ -252,14 +252,14 @@ and for every integer i, $0 \leq i < s_0, $
 \end{definition}
 This definition of $\Phi$ does a reversal of the 0th axis of A. 
 
-Note
-also that all operations are over the 0th axis. The operator $\Omega$~\cite{mul88} extends operations over all other dimensions.
+
 
 \subsection*{Higher Order Operations}
 
 Thus far operation on arrays, such as concatenation, rotation, etc., have been 
 performed over their 0th dimensions.  We introduce the higher order binary 
-operation $\Omega$, which is defined when its left argument is a unary or binary
+operation $\Omega$~\cite{mul88}  which extends operations over all dimensions.
+$\Omega$ is defined when its left argument is a unary or binary
 operation and its right argument is a vector describing the dimension upon 
 which operations are to be performed, or which sub-arrays are used in 
 operations.  The dimension upon which operations are to be performed is often 
@@ -288,10 +288,10 @@ Get shape:
 & = & 2 \cat ((1\drop (\rho ( \Phi A)))) \nonumber \\
 &=& 2 \cat ((1 \drop (\rho  A))) \nonumber \\
 &=& 2 \cat <\;5\;4> \nonumber \\
-&=& <2\;4\;5>
+&=& <2\;5\;4>
 \end{eqnarray}
 Now that we have the {\em shape}, we can {Psi-Reduce}.
-\[ \forall \;\;\; i,j,k \;\;\; \ni \;\;\; 0 \;\;\;\leq i,j,k < \;\;\;<2\;4\;5> \]
+\[ \forall \;\;\; i,j,k \;\;\; \ni \;\;\; 0 \;\;\;\leq i,j,k < \;\;\;<2\;5\;4> \]
 \[<i\;j\;k> \psi X \]
 \begin{eqnarray}
 & =&<i\;j\;k> \psi (2 \take ( \Phi A)) \times ( 1 \drop (\Phi A)) \nonumber \\
@@ -321,7 +321,7 @@ Thus, let Y denote $(<2-i> \psi A ) \times ( <1-i> \psi A)$. Then the shape of Y
 \rho Y= 1 \drop (\rho A) = 1 \drop <3\;5\;4> = <5\;4>
 \end{eqnarray}
 i.e. the bounds for $j$ and $k$  above.
-Continuing with the PCT to create the {\em generic} ONF on p=2 processors, we use the index of the primary axis, i, $\ni\;\;0 \leq  i < p$, since $\rho X = <2\;4\;5>$.
+Continuing with the PCT to create the {\em generic} ONF on p=2 processors, we use the index of the primary axis, i, $\ni\;\;0 \leq  i < p$, since $\rho X = <2\;5\;4>$.
 Using $\gamma_{row}$ for row major ordering, Y is transformed into:
 \small
 \begin{eqnarray}
